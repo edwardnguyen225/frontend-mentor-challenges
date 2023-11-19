@@ -2,7 +2,7 @@
 
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import {
-  ChevronDownIcon,
+  ChevronRightIcon,
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
@@ -49,11 +49,16 @@ type Option = {
   color: string;
 };
 
-const DesktopOption = ({ name, path, color }: Option) => {
+const DesktopOption = ({ name, path }: Option) => {
   return (
     <Link
       href={path}
-      className={clsx(["text-sm font-semibold uppercase leading-6"])}
+      className={clsx([
+        "px-4 py-1",
+        "flex justify-center items-center",
+        "rounded",
+        "text-sm font-semibold uppercase leading-6 hover:bg-[#38384F]",
+      ])}
     >
       {name}
     </Link>
@@ -65,17 +70,22 @@ const MobileOption = ({ name, path, color }: Option) => {
     <Link
       href={path}
       className={clsx([
-        "-mx-3 block rounded-lg px-3 py-2 text-[15px] uppercase font-bold leading-[25px] hover:bg-[#419EBB]",
-        "flex gap-[25px] items-center",
+        "-mx-3 block rounded-lg px-3 py-2 text-[15px] uppercase font-bold leading-[25px] hover:bg-[#38384F]",
+        "flex justify-between items-center",
       ])}
     >
-      <span
-        className={`block w-5 h-5 rounded-xl`}
-        style={{
-          background: color,
-        }}
-      />
-      {name}
+      <span className="flex items-center gap-[25px]">
+        <span
+          className={`block w-5 h-5 rounded-xl`}
+          style={{
+            background: color,
+          }}
+        />
+        {name}
+      </span>
+      <span>
+        <ChevronRightIcon className="w-4 h-8" stroke="white" />
+      </span>
     </Link>
   );
 };
@@ -83,10 +93,13 @@ const MobileOption = ({ name, path, color }: Option) => {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // TODO: Show border for mobile open
   return (
-    <header className="bg-[#070724]">
+    <header className="bg-[#070724] border-b-[1px] border-b-white/20">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className={clsx([
+          "mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8",
+        ])}
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -101,10 +114,10 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" stroke="white" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+        <Popover.Group className="hidden lg:flex lg:gap-x-2">
           {Object.entries(Planets).map(([name, data]) => (
             <DesktopOption key={name} name={name} path="#" color={data.color} />
           ))}
@@ -128,7 +141,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <div className="mt-6 flow-root">
