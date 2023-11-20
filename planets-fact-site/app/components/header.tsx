@@ -1,12 +1,10 @@
-"use client";
-
+import React, { useState } from "react";
 import { getAllPlanetsColor } from "@/app/lib/planets";
 import { Dialog, Popover } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
 import { antonio } from "../lib/fonts";
 
 type Option = {
@@ -33,26 +31,29 @@ const DesktopOption = ({ name, path }: Option) => {
 
 const MobileOption = ({ name, path, color }: Option) => {
   return (
-    <Link
-      href={path}
-      className={clsx([
-        "-mx-3 block rounded-lg px-3 py-2 text-[15px] uppercase font-bold leading-[25px] hover:bg-[#38384F]",
-        "flex justify-between items-center",
-      ])}
-    >
-      <span className="flex items-center gap-[25px]">
-        <span
-          className={`block w-5 h-5 rounded-xl`}
-          style={{
-            background: color,
-          }}
-        />
-        {name}
-      </span>
-      <span>
-        <ChevronRightIcon className="w-4 h-8" stroke="white" />
-      </span>
-    </Link>
+    <div>
+      <Link
+        href={path}
+        className={clsx([
+          "px-3 py-4",
+          "block rounded-lg text-[15px] uppercase font-bold leading-[25px] hover:bg-[#38384F]",
+          "flex justify-between items-center",
+        ])}
+      >
+        <span className="flex items-center gap-[25px]">
+          <span
+            className={`block w-5 h-5 rounded-xl`}
+            style={{
+              background: color,
+            }}
+          />
+          <span>{name}</span>
+        </span>
+        <span>
+          <ChevronRightIcon className="w-4 h-8 fill-white/40" />
+        </span>
+      </Link>
+    </div>
   );
 };
 
@@ -60,24 +61,25 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const planetsColor = getAllPlanetsColor();
 
+  const siteName = (
+    <Link href="#">
+      <span className={clsx(["uppercase text-[28px]", antonio.className])}>
+        The planets
+      </span>
+    </Link>
+  );
+
   // TODO: Show border for mobile open
   return (
-    <header className="bg-[#070724] border-b-[1px] border-b-white/20">
+    <header>
       <nav
         className={clsx([
           "mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8",
+          "border-b border-b-white/20",
         ])}
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
-          <Link href="#">
-            <span
-              className={clsx(["uppercase text-[28px]", antonio.className])}
-            >
-              The planets
-            </span>
-          </Link>
-        </div>
+        <div className="flex lg:flex-1">{siteName}</div>
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -101,11 +103,15 @@ export default function Header() {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[#070724] px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="uppercase">The Planets</span>
-            </a>
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[#070724] sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div
+            className={clsx([
+              "p-6",
+              "flex items-center justify-between",
+              "border-b border-b-white/20",
+            ])}
+          >
+            {siteName}
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -115,13 +121,11 @@ export default function Header() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
-                {Object.entries(planetsColor).map(([name, color]) => (
-                  <MobileOption key={name} name={name} path="#" color={color} />
-                ))}
-              </div>
+          <div className="mt-11 mx-6 flow-root">
+            <div className="divide-y divide-solid divide-white/10">
+              {Object.entries(planetsColor).map(([name, color]) => (
+                <MobileOption key={name} name={name} path="#" color={color} />
+              ))}
             </div>
           </div>
         </Dialog.Panel>
