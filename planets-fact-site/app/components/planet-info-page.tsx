@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 
-import LinkIcon from "@/public/assets/external-link-square-with-an-arrow-in-right-diagonal.svg";
+import LinkIcon from "@/public/images/external-link-square-with-an-arrow-in-right-diagonal.svg";
 import { CardInformation, Header } from "@components";
 import { PlanetInfoTypes, getPlanetInfo, PlanetNames } from "@lib/planets";
 import { useParams } from "next/navigation";

@@ -1,36 +1,36 @@
 import PlanetsData from "./data.json";
 
-import mercuryPlanet from "@/public/assets/planet-mercury.svg";
-import mercuryInternal from "@/public/assets/planet-mercury-internal.svg";
-import mercuryGeology from "@/public/assets/geology-mercury.png";
+import mercuryPlanet from "@/public/images/planet-mercury.svg";
+import mercuryInternal from "@/public/images/planet-mercury-internal.svg";
+import mercuryGeology from "@/public/images/geology-mercury.png";
 
-import venusPlanet from "@/public/assets/planet-venus.svg";
-import venusInternal from "@/public/assets/planet-venus-internal.svg";
-import venusGeology from "@/public/assets/geology-venus.png";
+import venusPlanet from "@/public/images/planet-venus.svg";
+import venusInternal from "@/public/images/planet-venus-internal.svg";
+import venusGeology from "@/public/images/geology-venus.png";
 
-import earthPlanet from "@/public/assets/planet-earth.svg";
-import earthInternal from "@/public/assets/planet-earth-internal.svg";
-import earthGeology from "@/public/assets/geology-earth.png";
+import earthPlanet from "@/public/images/planet-earth.svg";
+import earthInternal from "@/public/images/planet-earth-internal.svg";
+import earthGeology from "@/public/images/geology-earth.png";
 
-import marsPlanet from "@/public/assets/planet-mars.svg";
-import marsInternal from "@/public/assets/planet-mars-internal.svg";
-import marsGeology from "@/public/assets/geology-mars.png";
+import marsPlanet from "@/public/images/planet-mars.svg";
+import marsInternal from "@/public/images/planet-mars-internal.svg";
+import marsGeology from "@/public/images/geology-mars.png";
 
-import jupiterPlanet from "@/public/assets/planet-jupiter.svg";
-import jupiterInternal from "@/public/assets/planet-jupiter-internal.svg";
-import jupiterGeology from "@/public/assets/geology-jupiter.png";
+import jupiterPlanet from "@/public/images/planet-jupiter.svg";
+import jupiterInternal from "@/public/images/planet-jupiter-internal.svg";
+import jupiterGeology from "@/public/images/geology-jupiter.png";
 
-import saturnPlanet from "@/public/assets/planet-saturn.svg";
-import saturnInternal from "@/public/assets/planet-saturn-internal.svg";
-import saturnGeology from "@/public/assets/geology-saturn.png";
+import saturnPlanet from "@/public/images/planet-saturn.svg";
+import saturnInternal from "@/public/images/planet-saturn-internal.svg";
+import saturnGeology from "@/public/images/geology-saturn.png";
 
-import uranusPlanet from "@/public/assets/planet-uranus.svg";
-import uranusInternal from "@/public/assets/planet-uranus-internal.svg";
-import uranusGeology from "@/public/assets/geology-uranus.png";
+import uranusPlanet from "@/public/images/planet-uranus.svg";
+import uranusInternal from "@/public/images/planet-uranus-internal.svg";
+import uranusGeology from "@/public/images/geology-uranus.png";
 
-import neptunePlanet from "@/public/assets/planet-neptune.svg";
-import neptuneInternal from "@/public/assets/planet-neptune-internal.svg";
-import neptuneGeology from "@/public/assets/geology-neptune.png";
+import neptunePlanet from "@/public/images/planet-neptune.svg";
+import neptuneInternal from "@/public/images/planet-neptune-internal.svg";
+import neptuneGeology from "@/public/images/geology-neptune.png";
 import { StaticImageData } from "next/image";
 
 export enum PlanetNames {
