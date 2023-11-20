@@ -9,12 +9,7 @@ import PlanetMecury from "./../public/assets/planet-mercury.svg";
 import LinkIcon from "./../public/assets/external-link-square-with-an-arrow-in-right-diagonal.svg";
 import Link from "next/link";
 import { antonio } from "./fonts";
-
-enum PlanetInfoType {
-  Overview = "Overview",
-  Structure = "Structure",
-  Surface = "Surface",
-}
+import { PlanetInfoTypes, PlanetNames, getPlanetInfo } from "@/utils/planets";
 
 const Tab = ({
   label,
@@ -73,9 +68,12 @@ const CardInformation = ({
 };
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<PlanetInfoType>(
-    PlanetInfoType.Overview,
+  const [activeTab, setActiveTab] = useState<PlanetInfoTypes>(
+    PlanetInfoTypes.OVERVIEW
   );
+  const planetInfo = getPlanetInfo(PlanetNames.MERCURY);
+
+  if (!planetInfo) return;
 
   return (
     <>
@@ -83,7 +81,7 @@ export default function Home() {
       <main>
         <div className="text-sm font-medium text-center text-white/50 border-b border-white/50">
           <ul className="flex justify-between">
-            {(Object.keys(PlanetInfoType) as Array<PlanetInfoType>).map(
+            {(Object.values(PlanetInfoTypes) as PlanetInfoTypes[]).map(
               (infoType) => (
                 <Tab
                   key={infoType}
@@ -92,7 +90,7 @@ export default function Home() {
                   href="#"
                   onClick={() => setActiveTab(infoType)}
                 />
-              ),
+              )
             )}
           </ul>
         </div>
@@ -103,20 +101,16 @@ export default function Home() {
             className="w-[30vw] h-auto max-w-[290px]"
           />
           <div className="flex flex-col items-center">
-            <h2>Mecury</h2>
+            <h2>{planetInfo.name}</h2>
             <p className="mt-4 w-80 text-center text-white text-[11px] leading-[22px]">
-              Mercury is the smallest planet in the Solar System and the closest
-              to the Sun. Its orbit around the Sun takes 87.97 Earth days, the
-              shortest of all the Sun&apos;s planets. Mercury is one of four
-              terrestrial planets in the Solar System, and is a rocky body like
-              Earth.
+              {planetInfo[activeTab].content}
             </p>
 
             <div className="mt-8 flex gap-1 items-center text-white/50">
               <span>Source</span>
               <span>:</span>
               <Link
-                href="https://en.wikipedia.org/wiki/Mercury_(planet)"
+                href={planetInfo[activeTab].source}
                 className="font-bold flex gap-1 hover:underline"
                 target="_blank"
                 referrerPolicy="no-referrer"
@@ -131,10 +125,19 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-7 w-full flex flex-col gap-2">
-            <CardInformation label="rotation time" value="58.6 days" />
-            <CardInformation label="revolution time" value="87.97 days" />
-            <CardInformation label="radius" value="2,439.7 km" />
-            <CardInformation label="average temp." value="430°c" />
+            <CardInformation
+              label="rotation time"
+              value={planetInfo.rotation}
+            />
+            <CardInformation
+              label="revolution time"
+              value={planetInfo.revolution}
+            />
+            <CardInformation label="radius" value={planetInfo.radius} />
+            <CardInformation
+              label="average temp."
+              value={planetInfo.temperature}
+            />
           </div>
         </div>
       </main>
