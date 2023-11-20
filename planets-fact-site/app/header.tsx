@@ -1,47 +1,12 @@
 "use client";
 
-import { Dialog, Popover, Transition } from "@headlessui/react";
-import {
-  ChevronRightIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { getAllPlanetsColor } from "@/utils/planets";
+import { Dialog, Popover } from "@headlessui/react";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
-import { Fragment, useState } from "react";
-
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
-
-const Planets = {
-  mecury: {
-    color: "#DEF4FC",
-  },
-  venus: {
-    color: "#F7CC7F",
-  },
-  earth: {
-    color: "#545BFE",
-  },
-  mars: {
-    color: "#FF6A45",
-  },
-  jupiter: {
-    color: "#ECAD7A",
-  },
-  saturn: {
-    color: "#FCCB6B",
-  },
-  uranus: {
-    color: "#65F0D5",
-  },
-  neptune: {
-    color: "#497EFA",
-  },
-};
+import { useState } from "react";
 
 type Option = {
   name: string;
@@ -92,6 +57,7 @@ const MobileOption = ({ name, path, color }: Option) => {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const planetsColor = getAllPlanetsColor();
 
   // TODO: Show border for mobile open
   return (
@@ -118,8 +84,8 @@ export default function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-2">
-          {Object.entries(Planets).map(([name, data]) => (
-            <DesktopOption key={name} name={name} path="#" color={data.color} />
+          {Object.entries(planetsColor).map(([name, color]) => (
+            <DesktopOption key={name} name={name} path="#" color={color} />
           ))}
         </Popover.Group>
       </nav>
@@ -147,13 +113,8 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {Object.entries(Planets).map(([name, data]) => (
-                  <MobileOption
-                    key={name}
-                    name={name}
-                    path="#"
-                    color={data.color}
-                  />
+                {Object.entries(planetsColor).map(([name, color]) => (
+                  <MobileOption key={name} name={name} path="#" color={color} />
                 ))}
               </div>
             </div>

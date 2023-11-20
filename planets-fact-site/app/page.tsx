@@ -95,11 +95,13 @@ export default function Home() {
           </ul>
         </div>
         <div className={clsx(["p-6", "flex flex-col items-center"])}>
-          <Image
-            src={PlanetMecury}
-            alt="Planet Mecury"
-            className="w-[30vw] h-auto max-w-[290px]"
-          />
+          <div className="w-full min-w-[327px] h-full min-h-[327px] flex justify-center items-center">
+            <Image
+              src={PlanetMecury}
+              alt="Planet Mecury"
+              className="w-[30vw] h-auto max-w-[290px]"
+            />
+          </div>
           <div className="flex flex-col items-center">
             <h2>{planetInfo.name}</h2>
             <p className="mt-4 w-80 text-center text-white text-[11px] leading-[22px]">

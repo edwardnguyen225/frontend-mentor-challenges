@@ -65,3 +65,5 @@ PlanetsData.forEach((data) => {
 });
 
 export const getPlanetInfo = (name: PlanetNames) => planets.get(name);
+
+export const getAllPlanetsColor = () => PlanetsColorMap;
