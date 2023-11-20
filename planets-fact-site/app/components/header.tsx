@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { getAllPlanetsColor } from "@/app/lib/planets";
 import { Dialog, Popover } from "@headlessui/react";
@@ -6,44 +8,46 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import { antonio } from "../lib/fonts";
+import { useParams } from "next/navigation";
 
 type Option = {
   name: string;
-  path: string;
+  href: string;
   color: string;
+  isActive?: boolean;
 };
 
-/**
- * color: #FFF;
-font-family: Spartan;
-font-size: 11px;
-font-style: normal;
-font-weight: 700;
-line-height: 25px; /* 227.273% 
-letter-spacing: 1px;
-text-transform: uppercase;
- */
-const DesktopOption = ({ name, path }: Option) => {
+const DesktopOption = ({ name, href, isActive, color }: Option) => {
   return (
     <Link
-      href={path}
+      href={href}
       className={clsx([
         "px-4 py-1",
-        "flex justify-center items-center",
+        "flex justify-center items-center relative",
         "rounded",
         "text-[11px] font-semibold uppercase leading-[25px] tracking-[1px] hover:bg-[#38384F]",
+        "hover:text-white",
+        isActive && "text-white",
       ])}
     >
       {name}
+      {isActive && (
+        <span
+          className="w-2 h-2 rounded absolute bottom-0"
+          style={{
+            background: color,
+          }}
+        />
+      )}
     </Link>
   );
 };
 
-const MobileOption = ({ name, path, color }: Option) => {
+const MobileOption = ({ name, href, color }: Option) => {
   return (
     <div>
       <Link
-        href={path}
+        href={href}
         className={clsx([
           "px-3 py-4",
           "block rounded-lg text-[15px] uppercase font-bold leading-[25px] hover:bg-[#38384F]",
@@ -68,6 +72,7 @@ const MobileOption = ({ name, path, color }: Option) => {
 };
 
 export default function Header() {
+  const { planet: planetName } = useParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const planetsColor = getAllPlanetsColor();
 
@@ -105,7 +110,13 @@ export default function Header() {
         </div>
         <Popover.Group className="hidden md:flex md:text-white/75 lg:gap-x-2">
           {Object.entries(planetsColor).map(([name, color]) => (
-            <DesktopOption key={name} name={name} path="#" color={color} />
+            <DesktopOption
+              key={name}
+              isActive={planetName === name}
+              name={name}
+              href={name}
+              color={color}
+            />
           ))}
         </Popover.Group>
       </nav>
@@ -137,7 +148,12 @@ export default function Header() {
           <div className="mt-11 mx-6 flow-root">
             <div className="divide-y divide-solid divide-white/10">
               {Object.entries(planetsColor).map(([name, color]) => (
-                <MobileOption key={name} name={name} path="#" color={color} />
+                <MobileOption
+                  key={name}
+                  name={name}
+                  href={name}
+                  color={color}
+                />
               ))}
             </div>
           </div>

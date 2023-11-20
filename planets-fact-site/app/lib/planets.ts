@@ -1,14 +1,14 @@
 import PlanetsData from "./data.json";
 
 export enum PlanetNames {
-  MERCURY = "Mercury",
-  VENUS = "Venus",
-  EARTH = "Earth",
-  MARS = "Mars",
-  JUPITER = "Jupiter",
-  SATURN = "Saturn",
-  URANUS = "Uranus",
-  NEPTUNE = "Neptune",
+  MERCURY = "mercury",
+  VENUS = "venus",
+  EARTH = "earth",
+  MARS = "mars",
+  JUPITER = "jupiter",
+  SATURN = "saturn",
+  URANUS = "uranus",
+  NEPTUNE = "neptune",
 }
 
 const PlanetsColorMap: Record<PlanetNames, string> = {
@@ -52,7 +52,7 @@ type PlanetInfo = {
 
 const planets = new Map<PlanetNames, PlanetInfo>();
 PlanetsData.forEach((data) => {
-  const name = data.name as unknown as PlanetNames;
+  const name = data.name.toLowerCase() as unknown as PlanetNames;
   const color = PlanetsColorMap[name];
   planets.set(name, {
     ...data,
