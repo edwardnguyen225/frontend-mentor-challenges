@@ -1,12 +1,13 @@
 "use client";
 
-import { getAllPlanetsColor } from "@/utils/planets";
+import { getAllPlanetsColor } from "@/app/lib/planets";
 import { Dialog, Popover } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
+import { antonio } from "../lib/fonts";
 
 type Option = {
   name: string;
@@ -69,9 +70,13 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="uppercase">The planets</span>
-          </a>
+          <Link href="#">
+            <span
+              className={clsx(["uppercase text-[28px]", antonio.className])}
+            >
+              The planets
+            </span>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button

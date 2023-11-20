@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
-import { antonio } from "./fonts";
+import { antonio } from "./lib/fonts";
 
 export const metadata: Metadata = {
   title: "The Planets Fact",

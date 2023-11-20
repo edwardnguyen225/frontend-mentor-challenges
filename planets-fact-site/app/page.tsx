@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "./header";
-import clsx from "clsx";
 import Image from "next/image";
-
-import PlanetMecury from "./../public/assets/planet-mercury.svg";
-import LinkIcon from "./../public/assets/external-link-square-with-an-arrow-in-right-diagonal.svg";
 import Link from "next/link";
-import { antonio } from "./fonts";
-import { PlanetInfoTypes, PlanetNames, getPlanetInfo } from "@/utils/planets";
+import clsx from "clsx";
+
+import PlanetMercury from "@/public/assets/planet-mercury.svg";
+import LinkIcon from "@/public/assets/external-link-square-with-an-arrow-in-right-diagonal.svg";
+import { CardInformation, Header } from "@components";
+import { PlanetInfoTypes, getPlanetInfo, PlanetNames } from "@lib/planets";
 
 const Tab = ({
   label,
@@ -43,30 +42,6 @@ const Tab = ({
   );
 };
 
-const CardInformation = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) => {
-  return (
-    <div
-      className={clsx([
-        "px-6 py-3 w-full",
-        "flex items-center justify-between",
-        "border border-[#38384F]",
-        "uppercase",
-      ])}
-    >
-      <span className="text-white/50 text-[8px] font-bold leading-none tracking-wide">
-        {label}
-      </span>
-      <span className={clsx(["text-xl", antonio.variable])}>{value}</span>
-    </div>
-  );
-};
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState<PlanetInfoTypes>(
     PlanetInfoTypes.OVERVIEW
@@ -97,8 +72,8 @@ export default function Home() {
         <div className={clsx(["p-6", "flex flex-col items-center"])}>
           <div className="w-full min-w-[327px] h-full min-h-[327px] flex justify-center items-center">
             <Image
-              src={PlanetMecury}
-              alt="Planet Mecury"
+              src={PlanetMercury}
+              alt="Planet Mercury"
               className="w-[30vw] h-auto max-w-[290px]"
             />
           </div>
