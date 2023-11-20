@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 
-import PlanetMercury from "@/public/assets/planet-mercury.svg";
 import LinkIcon from "@/public/assets/external-link-square-with-an-arrow-in-right-diagonal.svg";
 import { CardInformation, Header } from "@components";
 import { PlanetInfoTypes, getPlanetInfo, PlanetNames } from "@lib/planets";
 import { useParams } from "next/navigation";
+import PlanetImage from "./planet-image";
 
 const Tab = ({
   label,
@@ -41,11 +41,12 @@ const Tab = ({
 };
 
 export default function PlanetInfoPage() {
-  const { planet } = useParams();
+  const params = useParams();
+  const planet = params.planet as PlanetNames;
   const [activeTab, setActiveTab] = useState<PlanetInfoTypes>(
     PlanetInfoTypes.OVERVIEW
   );
-  const planetInfo = getPlanetInfo(planet as PlanetNames);
+  const planetInfo = getPlanetInfo(planet);
 
   if (!planetInfo) return;
 
@@ -95,11 +96,7 @@ export default function PlanetInfoPage() {
         >
           <div className="w-full lg:flex">
             <div className="w-full min-w-[327px] h-auto min-h-[327px] flex flex-1 justify-center items-center">
-              <Image
-                src={PlanetMercury}
-                alt="Planet Mercury"
-                className="w-[30vw] h-auto max-w-[290px]"
-              />
+              <PlanetImage planet={planet} type={activeTab} />
             </div>
             <div className="w-full lg:w-[350px] min-h-[260px] flex flex-0 lg:flex-col">
               <div className="flex flex-col flex-1 items-center md:items-start">
