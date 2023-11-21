@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-TODO: Add screen shot
+![](./public/images/screenshot.png)
 
 ### Links
 
