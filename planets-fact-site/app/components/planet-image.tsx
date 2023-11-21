@@ -7,30 +7,29 @@ type Props = {
   type: PlanetInfoTypes;
 };
 
-const PlanetGeology = ({ planet }: Omit<Props, "type">) => (
-  <div className="relative">
-    <Image
-      src={getPlanetImage(planet, PlanetInfoTypes.OVERVIEW) ?? ""}
-      alt={`${planet} image`}
-      className="w-[30vw] h-auto max-w-[290px]"
-    />
-    <Image
-      src={getPlanetImage(planet, PlanetInfoTypes.SURFACE_GEOLOGY) ?? ""}
-      alt={`${planet} image`}
-      className="w-[163px] h-[199px] absolute left-[22.5%] -bottom-1/4"
-    />
-  </div>
-);
+const PlanetImage = ({ planet, type }: Props) => {
+  const shouldShowGeology = type === PlanetInfoTypes.SURFACE_GEOLOGY;
+  const imageType =
+    type === PlanetInfoTypes.INTERNAL_STRUCTURE
+      ? PlanetInfoTypes.INTERNAL_STRUCTURE
+      : PlanetInfoTypes.OVERVIEW;
 
-const PlanetImage = ({ planet, type }: Props) =>
-  type === PlanetInfoTypes.SURFACE_GEOLOGY ? (
-    <PlanetGeology planet={planet} />
-  ) : (
-    <Image
-      src={getPlanetImage(planet, type) ?? ""}
-      alt="Planet Mercury"
-      className="w-[30vw] h-auto max-w-[290px]"
-    />
+  return (
+    <div className="relative">
+      <Image
+        src={getPlanetImage(planet, imageType) ?? ""}
+        alt={`${planet} image`}
+        className="w-[30vw] h-auto max-w-[290px]"
+      />
+      {shouldShowGeology && (
+        <Image
+          src={getPlanetImage(planet, PlanetInfoTypes.SURFACE_GEOLOGY) ?? ""}
+          alt={`${planet} image`}
+          className="w-1/2 h-auto absolute translate-x-1/2 -translate-y-[45%]"
+        />
+      )}
+    </div>
   );
+};
 
 export default PlanetImage;
