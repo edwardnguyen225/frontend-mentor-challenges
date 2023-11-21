@@ -2,6 +2,8 @@
 
 This is a solution to the [Planets fact site challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/planets-fact-site-gazqN8w_f). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
+Live preview: https://planets-fact-site-4cjpmdbkn-edwardnguyen225s-projects.vercel.app/mercury
+
 ## Table of contents
 
 - [Frontend Mentor - Planets fact site solution](#frontend-mentor---planets-fact-site-solution)
@@ -9,7 +11,6 @@ This is a solution to the [Planets fact site challenge on Frontend Mentor](https
   - [Overview](#overview)
     - [The challenge](#the-challenge)
     - [Screenshot](#screenshot)
-    - [Links](#links)
   - [My process](#my-process)
     - [Built with](#built-with)
     - [Project structure](#project-structure)
@@ -28,11 +29,6 @@ Users should be able to:
 ### Screenshot
 
 ![](./public/images/screenshot.png)
-
-### Links
-
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
 
