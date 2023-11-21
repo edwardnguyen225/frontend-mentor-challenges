@@ -10,39 +10,10 @@ import { CardInformation, Header } from "@components";
 import { PlanetInfoTypes, getPlanetInfo, PlanetNames } from "@lib/planets";
 import { useParams } from "next/navigation";
 import PlanetImage from "./planet-image";
+import Tabs from "./tabs";
 
-const Tab = ({
-  label,
-  isActive,
-  onClick,
-}: {
-  label: string;
-  isActive: boolean;
-  onClick: () => void;
-}) => {
-  return (
-    <li className="me-2">
-      <div
-        className={clsx([
-          "flex-grow",
-          "uppercase text-[9px] font-bold tracking-widest",
-          "inline-block p-4 border-b-2 rounded-t-lg",
-          isActive && "text-white",
-          isActive ? "border-b-4 border-[#419EBB]" : "border-transparent",
-          "hover:text-white hover:bg-[#38384F]",
-        ])}
-        aria-current={isActive ? "page" : false}
-        onClick={onClick}
-      >
-        {label}
-      </div>
-    </li>
-  );
-};
-
-export default function PlanetInfoPage() {
-  const params = useParams();
-  const planet = params.planet as PlanetNames;
+const PlanetInfoPage = () => {
+  const { planet } = useParams<{ planet: PlanetNames }>();
   const [activeTab, setActiveTab] = useState<PlanetInfoTypes>(
     PlanetInfoTypes.OVERVIEW
   );
@@ -50,43 +21,16 @@ export default function PlanetInfoPage() {
 
   if (!planetInfo) return;
 
-  const tabsControllerForMobile = (
-    <div className="text-sm font-medium text-center text-white/50 border-b border-white/50 md:hidden">
-      <ul className="flex justify-between">
-        {(Object.values(PlanetInfoTypes) as PlanetInfoTypes[]).map(
-          (infoType) => (
-            <Tab
-              key={infoType}
-              label={infoType}
-              isActive={activeTab === infoType}
-              onClick={() => setActiveTab(infoType)}
-            />
-          )
-        )}
-      </ul>
-    </div>
-  );
-
-  const additionalInfo = (
-    <div
-      className={clsx([
-        "mt-7 w-full flex flex-col gap-2",
-        "md:flex-row",
-        "lg:mt-20",
-      ])}
-    >
-      <CardInformation label="rotation time" value={planetInfo.rotation} />
-      <CardInformation label="revolution time" value={planetInfo.revolution} />
-      <CardInformation label="radius" value={planetInfo.radius} />
-      <CardInformation label="average temp." value={planetInfo.temperature} />
-    </div>
-  );
-
   return (
     <>
       <Header />
       <main>
-        {tabsControllerForMobile}
+        <Tabs.Horizontal
+          options={Object.values(PlanetInfoTypes)}
+          activeOptions={activeTab}
+          onOptionClick={(option) => setActiveTab(option as PlanetInfoTypes)}
+          containerClassName="md:hidden"
+        />
         <div
           className={clsx([
             "p-6",
@@ -122,36 +66,41 @@ export default function PlanetInfoPage() {
                   </Link>
                 </div>
               </div>
-              <div className="hidden md:block flex-1 lg:mt-10">
-                <ul className="w-full h-full flex flex-col justify-center items-end gap-4">
-                  {(Object.values(PlanetInfoTypes) as PlanetInfoTypes[]).map(
-                    (infoType, index) => (
-                      <div
-                        key={infoType}
-                        className={clsx([
-                          "min-w-[280px] h-12 lg:w-full",
-                          "px-5 py-2",
-                          "flex items-center gap-6",
-                          "text-xs font-bold uppercase leading-[25px] tracking-[2.57px]",
-                          "border hover:bg-[#D8D8D8]/20 hover:border-[#D8D8D8]/20",
-                          infoType === activeTab
-                            ? "bg-[#419EBB] border-[#419EBB]"
-                            : "border-white/20",
-                        ])}
-                        onClick={() => setActiveTab(infoType)}
-                      >
-                        <span className="opacity-50">0{index + 1}</span>
-                        {infoType}
-                      </div>
-                    )
-                  )}
-                </ul>
-              </div>
+              <Tabs.Vertical
+                options={Object.values(PlanetInfoTypes)}
+                activeOptions={activeTab}
+                onOptionClick={(option) =>
+                  setActiveTab(option as PlanetInfoTypes)
+                }
+                containerClassName="hidden md:block flex-1 lg:mt-10"
+              />
             </div>
           </div>
-          {additionalInfo}
+          <div
+            className={clsx([
+              "mt-7 w-full flex flex-col gap-2",
+              "md:flex-row",
+              "lg:mt-20",
+            ])}
+          >
+            <CardInformation
+              label="rotation time"
+              value={planetInfo.rotation}
+            />
+            <CardInformation
+              label="revolution time"
+              value={planetInfo.revolution}
+            />
+            <CardInformation label="radius" value={planetInfo.radius} />
+            <CardInformation
+              label="average temp."
+              value={planetInfo.temperature}
+            />
+          </div>
         </div>
       </main>
     </>
   );
-}
+};
+
+export default PlanetInfoPage;
