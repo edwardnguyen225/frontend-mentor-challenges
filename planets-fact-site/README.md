@@ -12,7 +12,8 @@ This is a solution to the [Planets fact site challenge on Frontend Mentor](https
     - [Links](#links)
   - [My process](#my-process)
     - [Built with](#built-with)
-    - [What I learned](#what-i-learned)
+    - [Project structure](#project-structure)
+    - [Getting Started](#getting-started)
 
 ## Overview
 
@@ -26,15 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+TODO: Add screen shot
 
 ### Links
 
@@ -45,18 +38,33 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - For styles
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+### Project structure
 
-### What I learned
+```
+root/
+├── app/                --> Pages
+│   ├── components/     --> React component
+│   └── lib/            --> Utilities and data
+└── public/             --> Static files
+```
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+### Getting Started
 
-To see how you can add code snippets, see below:
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
