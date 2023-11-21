@@ -19,13 +19,13 @@ const PlanetImage = ({ planet, type }: Props) => {
       <Image
         src={getPlanetImage(planet, imageType) ?? ""}
         alt={`${planet} image`}
-        className="w-[30vw] h-auto max-w-[290px]"
+        className="scale-50 md:scale-75 lg:scale-100"
       />
       {shouldShowGeology && (
         <Image
           src={getPlanetImage(planet, PlanetInfoTypes.SURFACE_GEOLOGY) ?? ""}
           alt={`${planet} image`}
-          className="w-1/2 h-auto absolute translate-x-1/2 -translate-y-[45%]"
+          className="scale-50 md:scale-75 lg:scale-100 absolute left-1/2 top-[60%] translate-x-[-50%] md:translate-y-12 w-40"
         />
       )}
     </div>
