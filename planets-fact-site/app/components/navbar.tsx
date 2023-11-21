@@ -156,7 +156,7 @@ const Navbar = () => {
     <header>
       <nav
         className={clsx([
-          "mx-auto flex max-w-7xl items-center justify-between",
+          "mx-auto flex max-w-screen-xl items-center justify-between",
           "border-b border-b-white/20",
           "px-6 py-4",
           "md:pt-8 md:pb-5 md:flex md:flex-wrap md:gap-9 md:justify-center",

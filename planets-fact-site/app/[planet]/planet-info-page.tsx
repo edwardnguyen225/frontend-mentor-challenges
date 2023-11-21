@@ -22,7 +22,7 @@ const PlanetInfoPage = () => {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="mx-auto max-w-screen-xl">
         <Tabs.Horizontal
           options={Object.values(PlanetInfoTypes)}
           activeOptions={activeTab}

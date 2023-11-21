@@ -71,6 +71,8 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 178.571% */
+  background-image: url("/images/background-stars.svg");
+  background-repeat: repeat-y;
 }
 
 h1 {
