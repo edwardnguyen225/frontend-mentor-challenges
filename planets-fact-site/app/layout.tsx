@@ -22,7 +22,7 @@ export default function RootLayout({
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="./images/favicon-32x32.png"
+          href="./favicon-32x32.png"
         />
       </head>
       <body className={clsx([antonio.variable, "font-sans"])}>{children}</body>
