@@ -11,9 +11,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@popperjs/core": "^2.11.8",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-popper": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",
