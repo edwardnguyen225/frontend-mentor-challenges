@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import { PlanetInfoPage } from "@components";
 import { PlanetNames } from "../lib/planets";
+import PlanetInfoPage from "./planet-info-page";
 
 type Props = {
   params: { planet: string };

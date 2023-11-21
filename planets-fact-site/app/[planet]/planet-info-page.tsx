@@ -6,11 +6,9 @@ import Link from "next/link";
 import clsx from "clsx";
 
 import LinkIcon from "@/public/images/external-link-square-with-an-arrow-in-right-diagonal.svg";
-import { CardInformation, Header } from "@components";
+import { CardInformation, Navbar, PlanetImage, Tabs } from "@components";
 import { PlanetInfoTypes, getPlanetInfo, PlanetNames } from "@lib/planets";
 import { useParams } from "next/navigation";
-import PlanetImage from "./planet-image";
-import Tabs from "./tabs";
 
 const PlanetInfoPage = () => {
   const { planet } = useParams<{ planet: PlanetNames }>();
@@ -23,7 +21,7 @@ const PlanetInfoPage = () => {
 
   return (
     <>
-      <Header />
+      <Navbar />
       <main>
         <Tabs.Horizontal
           options={Object.values(PlanetInfoTypes)}

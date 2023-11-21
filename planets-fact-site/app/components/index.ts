@@ -1,3 +1,4 @@
 export { default as CardInformation } from "./card-information";
-export { default as Header } from "./navbar";
-export { default as PlanetInfoPage } from "./planet-info-page";
+export { default as Navbar } from "./navbar";
+export { default as PlanetImage } from "./planet-image";
+export { default as Tabs } from "./tabs";
