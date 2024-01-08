@@ -1,6 +1,8 @@
 import cx from 'classix';
 import React, { useState } from 'react';
 
+import { typographyStyles } from './Typography';
+
 interface TextFieldProps {
   label: string;
   value: string;
@@ -42,7 +44,8 @@ const TextField: React.FC<TextFieldProps> = ({
           value={value}
           onChange={handleInputChange}
           className={cx(
-            'w-full text-[13px]',
+            'w-full',
+            typographyStyles['body-lg'],
             'rounded border border-black/25 px-4 py-2',
             'placeholder:text-black/25)',
             error && 'border-red focus:border-red active:border-red',

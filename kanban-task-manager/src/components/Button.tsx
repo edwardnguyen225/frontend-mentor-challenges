@@ -1,6 +1,8 @@
 import cx from 'classix';
 import React from 'react';
 
+import { typographyStyles } from './Typography';
+
 interface ButtonProps {
   label: string;
   onClick: () => void;
@@ -20,7 +22,11 @@ const colors = {
 };
 
 const sizes = {
-  L: cx('py-4 px-6', 'rounded-3xl', 'text-[15px]'),
+  L: cx(
+    'pt-[15px] pb-[14px] px-6',
+    'rounded-3xl',
+    typographyStyles['heading-md'],
+  ),
   S: cx('py-2 px-6', 'rounded-[20px]', 'text-[13px]'),
 };
 

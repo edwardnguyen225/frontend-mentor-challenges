@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import IconChevronDown from '../../public/assets/icon-chevron-down.svg';
 import IconChevronUp from '../../public/assets/icon-chevron-up.svg';
+import { typographyStyles } from './Typography';
 
 interface DropdownProps {
   label: string;
@@ -38,7 +39,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         <button
           type="button"
           className={cx(
-            'w-full px-4 py-2 flex justify-between items-center text-[13px]',
+            'w-full px-4 py-2 flex justify-between items-center',
+            typographyStyles['body-lg'],
             isOpen && 'focus:border-main-purple',
             'rounded border border-black/25 px-4 py-2',
             'dark:bg-dark-grey dark:border-lines-dark dark:text-white',
@@ -67,7 +69,10 @@ const Dropdown: React.FC<DropdownProps> = ({
                 key={option}
                 tabIndex={index}
                 type="button"
-                className="cursor-pointer px-4 py-2 text-left text-[13px] text-medium-grey hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={cx(
+                  typographyStyles['body-lg'],
+                  'cursor-pointer px-4 py-2 text-left text-medium-grey hover:bg-gray-100 dark:hover:bg-gray-800',
+                )}
                 onClick={() => handleOptionClick(option)}
               >
                 {option}
