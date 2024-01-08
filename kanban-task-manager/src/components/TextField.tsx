@@ -32,7 +32,7 @@ const TextField: React.FC<TextFieldProps> = ({
     <div className="flex flex-col">
       <label
         htmlFor="text-input"
-        className={cx('text-xs text-medium-grey', 'dark:text-white')}
+        className={cx('text-xs text-medium-grey font-bold', 'dark:text-white')}
       >
         {label}
       </label>
@@ -42,7 +42,7 @@ const TextField: React.FC<TextFieldProps> = ({
           value={value}
           onChange={handleInputChange}
           className={cx(
-            'w-full text-sm',
+            'w-full text-[13px]',
             'rounded border border-black/25 px-4 py-2',
             'placeholder:text-black/25)',
             error && 'border-red focus:border-red active:border-red',

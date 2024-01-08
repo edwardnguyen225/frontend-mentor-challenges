@@ -30,7 +30,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div>
       <label
         htmlFor="text-input"
-        className={cx('text-xs text-medium-grey', 'dark:text-white')}
+        className={cx('text-xs text-medium-grey font-bold', 'dark:text-white')}
       >
         {label}
       </label>
@@ -38,7 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <button
           type="button"
           className={cx(
-            'w-full px-4 py-2 flex justify-between items-center text-sm',
+            'w-full px-4 py-2 flex justify-between items-center text-[13px]',
             isOpen && 'focus:border-main-purple',
             'rounded border border-black/25 px-4 py-2',
             'dark:bg-dark-grey dark:border-lines-dark dark:text-white',
@@ -67,7 +67,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 key={option}
                 tabIndex={index}
                 type="button"
-                className="cursor-pointer px-4 py-2 text-left text-sm text-medium-grey hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="cursor-pointer px-4 py-2 text-left text-[13px] text-medium-grey hover:bg-gray-100 dark:hover:bg-gray-800"
                 onClick={() => handleOptionClick(option)}
               >
                 {option}
