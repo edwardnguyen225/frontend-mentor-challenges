@@ -1,5 +1,12 @@
 {
   "Index": {
     "title": "Hello world!"
+  },
+  "Header": {
+    "add_new_task": "+ Add New Task"
+  },
+  "Board": {
+    "empty_board_desc": "This board is empty. Create a new column to get started.",
+    "add_new_column": "+ Add New Column"
   }
 }

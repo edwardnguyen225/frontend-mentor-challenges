@@ -7,6 +7,7 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { AppConfig } from '@/utils/AppConfig';
 
 export const metadata: Metadata = {
+  applicationName: AppConfig.name,
   icons: [
     {
       rel: 'icon',

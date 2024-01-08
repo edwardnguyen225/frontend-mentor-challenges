@@ -1,6 +1,14 @@
-import { useTranslations } from 'next-intl';
+'use client';
+
+import EmptyBoard from '@/components/EmptyBoard';
+import Header from '@/components/Header';
 
 export default function Page() {
-  const t = useTranslations('Index');
-  return <h1>{t('title')}</h1>;
+  return (
+    <div className="h-screen bg-light-grey">
+      <Header />
+      {/* Add your page content here */}
+      <EmptyBoard />
+    </div>
+  );
 }

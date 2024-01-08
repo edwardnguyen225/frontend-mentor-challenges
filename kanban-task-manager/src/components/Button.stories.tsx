@@ -5,10 +5,10 @@ import Button from './Button';
 const meta: Meta<typeof Button> = {
   component: Button,
   args: {
-    label: 'Button',
+    children: 'Button',
     variant: 'primary',
     size: 'S',
-    width: 'w-[255px]',
+    className: 'w-[255px]',
   },
 };
 
