@@ -15,6 +15,9 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
     },
+    fontFamily: {
+      sans: ['"Plus Jakarta Sans"'],
+    },
     extend: {
       colors: {
         gray: {
