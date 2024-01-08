@@ -10,18 +10,13 @@ interface ButtonProps {
 }
 
 const colors = {
-  primary: cx(
-    'bg-[var(--color-main-purple)] hover:bg-[var(--color-main-purple-light)]',
-    'text-white',
-  ),
+  primary: cx('bg-main-purple hover:bg-main-purple-light', 'text-white'),
   secondary: cx(
     'bg-[#EFEFF9] hover:bg-[#D8D7F1]',
-    'text-[var(--color-main-purple)]',
+    'dark:bg-white dark:hover:bg-white',
+    'text-main-purple',
   ),
-  destructive: cx(
-    'bg-[var(--color-red)] hover:bg-[var(--color-red-hover)]',
-    'text-white',
-  ),
+  destructive: cx('bg-red hover:bg-red-hover', 'text-white'),
 };
 
 const sizes = {

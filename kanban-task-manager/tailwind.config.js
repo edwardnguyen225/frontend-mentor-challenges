@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontSize: {
@@ -27,17 +28,18 @@ module.exports = {
           800: '#2d3748',
           900: '#1a202c',
         },
-        blue: {
-          100: '#ebf8ff',
-          200: '#bee3f8',
-          300: '#90cdf4',
-          400: '#63b3ed',
-          500: '#4299e1',
-          600: '#3182ce',
-          700: '#2b6cb0',
-          800: '#2c5282',
-          900: '#2a4365',
-        },
+        'main-purple': '#635fc7',
+        'main-purple-light': '#a8a4ff',
+        black: '#000112',
+        'very-dark-grey-black': '#20212c',
+        'dark-grey': '#2b2c37',
+        'lines-dark': '#3e3f4e',
+        'medium-grey': '#828fa3',
+        'lines-light': '#e4ebfa',
+        'light-grey': '#f4f7fd',
+        white: '#ffffff',
+        red: '#ea5555',
+        'red-hover': '#ff9898',
       },
     },
   },

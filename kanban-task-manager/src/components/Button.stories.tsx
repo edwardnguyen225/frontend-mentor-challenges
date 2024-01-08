@@ -4,26 +4,11 @@ import Button from './Button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  argTypes: {
-    label: {
-      control: 'text',
-      defaultValue: 'Button',
-    },
-    variant: {
-      options: ['primary', 'secondary', 'destructive'],
-      control: { type: 'radio' },
-      defaultValue: 'primary',
-    },
-    size: {
-      options: ['L', 'S'],
-      control: { type: 'radio' },
-      defaultValue: 'L',
-    },
-    width: {
-      control: 'text',
-      defaultValue: 'w-[255px]',
-      description: 'Width of the button, use TailwindCSS syntax',
-    },
+  args: {
+    label: 'Button',
+    variant: 'primary',
+    size: 'S',
+    width: 'w-[255px]',
   },
 };
 
