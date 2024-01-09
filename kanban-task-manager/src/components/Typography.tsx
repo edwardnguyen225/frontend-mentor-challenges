@@ -2,7 +2,7 @@ import cx from 'classix';
 import React from 'react';
 
 type TypographyProps = {
-  children: string;
+  children: string | string[];
   variant:
     | 'heading-xl'
     | 'heading-lg'
@@ -17,7 +17,7 @@ export const typographyStyles = {
   'heading-xl': 'text-2xl font-bold leading-[30px]',
   'heading-lg': 'text-lg font-bold leading-[23px]',
   'heading-md': 'text-[15px] font-bold leading-[19px]',
-  'heading-sm': 'text-xs font-bold leading-[15px]',
+  'heading-sm': 'text-xs font-bold leading-[15px] tracking-[2.4px]',
   'body-lg': 'text-[13px] font-normal leading-[23px]',
   'body-md': 'text-xs font-bold leading-[15px]',
 };

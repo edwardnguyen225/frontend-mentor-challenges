@@ -1,12 +1,15 @@
 {
-  "Index": {
-    "title": "Hello world!"
-  },
   "Header": {
+    "new_board": "New Board",
     "add_new_task": "+ Add New Task"
   },
   "Board": {
+    "edit_board": "Edit Board",
     "empty_board_desc": "This board is empty. Create a new column to get started.",
-    "add_new_column": "+ Add New Column"
+    "add_new_column": "+ Add New Column",
+    "new_column": "New Column",
+    "count_done_subtasks": "{count} of {total, plural, =1 {1 subtask} other {# subtasks}}",
+    "board_columns": "Board Columns",
+    "save_changes": "Save Changes"
   }
 }

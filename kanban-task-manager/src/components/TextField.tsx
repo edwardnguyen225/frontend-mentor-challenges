@@ -4,11 +4,12 @@ import React, { useState } from 'react';
 import { typographyStyles } from './Typography';
 
 interface TextFieldProps {
-  label: string;
   value: string;
   placeholder?: string;
   onChange: (value: string) => void;
   required?: boolean;
+  label?: string;
+  className?: string;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -17,6 +18,7 @@ const TextField: React.FC<TextFieldProps> = ({
   placeholder,
   onChange,
   required,
+  className,
 }) => {
   const [error, setError] = useState<string | null>(null);
 
@@ -31,14 +33,19 @@ const TextField: React.FC<TextFieldProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <label
-        htmlFor="text-input"
-        className={cx('text-xs text-medium-grey font-bold', 'dark:text-white')}
-      >
-        {label}
-      </label>
-      <div className="static mt-2 flex w-full">
+    <div className={cx('flex flex-col', className)}>
+      {label && (
+        <label
+          htmlFor="text-input"
+          className={cx(
+            'mb-2 text-xs text-medium-grey font-bold',
+            'dark:text-white',
+          )}
+        >
+          {label}
+        </label>
+      )}
+      <div className="relative flex w-full">
         <input
           type="text"
           value={value}
@@ -53,7 +60,7 @@ const TextField: React.FC<TextFieldProps> = ({
           )}
           placeholder={placeholder}
         />
-        {error && <p className="absolute right-8 mt-2 text-red">{error}</p>}
+        {error && <p className="absolute right-4 mt-2 text-red">{error}</p>}
       </div>
     </div>
   );
