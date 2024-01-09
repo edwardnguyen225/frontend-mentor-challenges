@@ -1,10 +1,14 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import Button from './Button';
-import Typography from './Typography';
+import { useBoardModalStore } from '@/stores/KanbanStore';
+
+import Button from '../../components/Button';
+import Typography from '../../components/Typography';
 
 const EmptyBoard: React.FC = () => {
+  const { openBoardModal } = useBoardModalStore();
+
   const t = useTranslations('Board');
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
@@ -15,9 +19,7 @@ const EmptyBoard: React.FC = () => {
         variant="primary"
         className="mt-8"
         size="L"
-        onClick={() => {
-          console.log('clicked');
-        }}
+        onClick={openBoardModal}
       >
         {t('add_new_column')}
       </Button>
