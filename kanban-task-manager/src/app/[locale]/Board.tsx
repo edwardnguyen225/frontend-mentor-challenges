@@ -19,7 +19,7 @@ const Board: React.FC = () => {
   return (
     <div className="flex gap-6 overflow-x-auto p-6">
       {columns.map((col) => (
-        <Column key={`column-${col}`} name={col.name} tasks={col.tasks} />
+        <Column key={`column-${col.name}`} name={col.name} tasks={col.tasks} />
       ))}
       <button
         type="button"

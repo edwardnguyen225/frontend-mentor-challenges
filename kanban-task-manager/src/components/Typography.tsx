@@ -2,7 +2,7 @@ import cx from 'classix';
 import React from 'react';
 
 type TypographyProps = {
-  children: string | string[];
+  children: React.ReactNode;
   variant:
     | 'heading-xl'
     | 'heading-lg'

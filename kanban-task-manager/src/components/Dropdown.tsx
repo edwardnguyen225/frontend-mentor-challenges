@@ -9,13 +9,17 @@ import { typographyStyles } from './Typography';
 interface DropdownProps {
   label: string;
   options: string[];
+  onChange: (value: string) => void;
   defaultValue?: string;
+  containerClassName?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   label,
   options,
+  onChange,
   defaultValue,
+  containerClassName,
 }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(
     defaultValue || null,
@@ -23,12 +27,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (option: string) => {
+    onChange(option);
     setSelectedOption(option);
     setIsOpen(false);
   };
 
   return (
-    <div>
+    <div className={cx(containerClassName)}>
       <label
         htmlFor="text-input"
         className={cx('text-xs text-medium-grey font-bold', 'dark:text-white')}

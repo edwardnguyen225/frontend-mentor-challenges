@@ -10,6 +10,8 @@
     "new_column": "New Column",
     "count_done_subtasks": "{count} of {total, plural, =1 {1 subtask} other {# subtasks}}",
     "board_columns": "Board Columns",
-    "save_changes": "Save Changes"
+    "save_changes": "Save Changes",
+    "subtasks_and_count": "Subtasks ({count} of {total})",
+    "current_status": "Current Status"
   }
 }

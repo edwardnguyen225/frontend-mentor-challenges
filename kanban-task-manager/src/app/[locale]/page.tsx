@@ -5,6 +5,7 @@ import { MODAL_ROOT_ID } from '@/components/Modal';
 
 import Board from './Board';
 import BoardModal from './BoardModal';
+import ViewTaskModal from './ViewTaskModal';
 
 export default function Page() {
   return (
@@ -12,6 +13,7 @@ export default function Page() {
       <Header />
       <Board />
       <BoardModal />
+      <ViewTaskModal />
     </div>
   );
 }

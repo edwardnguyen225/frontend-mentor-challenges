@@ -6,14 +6,14 @@ import IconCheck from '../../public/assets/icon-check.svg';
 
 interface SubtaskCheckboxProps {
   id: string;
-  subtask: string;
+  children: string | string[];
   completed: boolean;
   onChange: () => void;
 }
 
 const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
   id,
-  subtask,
+  children,
   completed,
   onChange,
 }) => {
@@ -34,7 +34,7 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
       }}
     >
       <label
-        htmlFor={`subtask-checkbox-${id}`}
+        htmlFor={`children-checkbox-${id}`}
         className={cx(
           'my-3 ml-3 mr-4 grid select-none grid-flow-col items-center gap-3 text-sm font-semibold dark:text-white',
           completed
@@ -44,7 +44,7 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
       >
         <div className="grid items-center justify-center">
           <input
-            id={`subtask-checkbox-${id}`}
+            id={`children-checkbox-${id}`}
             type="checkbox"
             checked={completed}
             onChange={handleCheckboxChange}
@@ -58,7 +58,7 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
             height={10}
           />
         </div>
-        {subtask}
+        {children}
       </label>
       <div />
     </div>
