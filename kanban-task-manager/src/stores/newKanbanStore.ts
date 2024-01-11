@@ -40,18 +40,44 @@ interface KanbanStore {
   tasks: {
     [key: string]: Task;
   };
+
+  openBoard: (boardId: string) => void;
   addBoard: (boardName: Board['name'], columns: Column['name'][]) => void;
   removeBoard: (boardId: string) => void;
+  updateCurrentBoardName: (newName: string) => void;
+
+  getCurrentColumns: () => Omit<Column, 'taskIds'>[];
+  getCurrentColumnsWithTaskIds: () => Column[];
+  updateCurrentColumns: (columns: { name: string; id?: string }[]) => void;
+
+  getTasksByColumnId: (columnId: Column['id']) => Task[];
+  addTask: (columnId: Column['id'], task: Omit<Task, 'id'>) => void;
+  updateTask: (task: Task) => void;
+  removeTask: (taskId: Task['id']) => void;
 
   // For testing purposes
   resetStore?: () => void;
 }
 
-export const useKanbanStore = create<KanbanStore>((set) => ({
+export const useKanbanStore = create<KanbanStore>((set, get) => ({
   boards: {},
   currentBoardId: null,
   columns: {},
   tasks: {},
+
+  openBoard: (boardId: string) => {
+    set(
+      produce((state: KanbanStore) => {
+        const board = state.boards[boardId];
+        if (board === undefined) {
+          return;
+        }
+
+        state.currentBoardId = boardId;
+      }),
+    );
+  },
+
   addBoard: (boardName, columns) => {
     const boardId = uuidv4();
     const columnIds = columns.map(() => uuidv4());
@@ -112,6 +138,176 @@ export const useKanbanStore = create<KanbanStore>((set) => ({
       }),
     );
   },
+
+  updateCurrentBoardName: (newName) => {
+    set(
+      produce((state: KanbanStore) => {
+        const currentBoard = state.boards[state.currentBoardId as string];
+        if (currentBoard === undefined) {
+          return;
+        }
+
+        currentBoard.name = newName;
+      }),
+    );
+  },
+
+  getCurrentColumns: () => {
+    return get()
+      .getCurrentColumnsWithTaskIds()
+      .map((column) => {
+        // eslint-disable-next-line unused-imports/no-unused-vars
+        const { taskIds, ...rest } = column;
+        return rest;
+      });
+  },
+  getCurrentColumnsWithTaskIds: () => {
+    const currentBoard = get().boards[get().currentBoardId as string];
+    if (currentBoard === undefined) {
+      return [];
+    }
+
+    const { columnIds } = currentBoard;
+    const columns: Column[] = [];
+    columnIds.forEach((columnId) => {
+      const column = get().columns[columnId];
+      if (column) {
+        columns.push(column);
+      }
+    });
+    return columns;
+  },
+  updateCurrentColumns: (columns) => {
+    // Remove columns in the board that are not in the new columns
+    // Add columns in the new columns that are not in the board
+    // Update the columns' names in the board if they are different
+    set(
+      produce((state: KanbanStore) => {
+        const currentBoard = state.boards[state.currentBoardId as string];
+        const currentColumns = state.columns;
+        if (currentBoard === undefined) {
+          return;
+        }
+
+        const currentColumnIds = currentBoard.columnIds;
+
+        const newColumnIds = [];
+
+        for (const column of columns) {
+          const { id, name } = column;
+
+          if (id === undefined) {
+            // Add new columns
+            const newColumnId = uuidv4();
+            newColumnIds.push(newColumnId);
+            currentColumns[newColumnId] = {
+              id: newColumnId,
+              name,
+              taskIds: [],
+            };
+          } else if (currentColumnIds.includes(id)) {
+            // Update existing columns
+            newColumnIds.push(id);
+            const columnInBoard = currentColumns[id];
+            if (columnInBoard && columnInBoard.name !== name) {
+              columnInBoard.name = name;
+            }
+          } else {
+            delete currentColumns[id];
+          }
+
+          // Update the board's columnIds
+          currentBoard.columnIds = newColumnIds;
+        }
+      }),
+    );
+  },
+
+  getTasksByColumnId: (columnId) => {
+    const column = get().columns[columnId];
+    if (column === undefined) {
+      return [];
+    }
+
+    const { taskIds } = column;
+    const tasks: Task[] = [];
+    taskIds.forEach((taskId) => {
+      const task = get().tasks[taskId];
+      if (task) {
+        tasks.push(task);
+      }
+    });
+    return tasks;
+  },
+
+  addTask: (columnId, task) => {
+    const taskId = uuidv4();
+    const newTask: Task = {
+      id: taskId,
+      ...task,
+    };
+
+    set(
+      produce((state: KanbanStore) => {
+        const currentBoard = state.boards[state.currentBoardId as string];
+        if (currentBoard === undefined) {
+          return;
+        }
+
+        const currentColumns = state.columns;
+
+        const column = currentColumns[columnId as string];
+        if (column === undefined) {
+          return;
+        }
+
+        column.taskIds.push(taskId);
+        state.tasks[taskId] = newTask;
+      }),
+    );
+  },
+
+  updateTask: (task) => {
+    set(
+      produce((state: KanbanStore) => {
+        const currentTask = state.tasks[task.id];
+        if (currentTask === undefined) {
+          return;
+        }
+
+        state.tasks[task.id] = task;
+      }),
+    );
+  },
+
+  removeTask: (taskId) => {
+    set(
+      produce((state: KanbanStore) => {
+        const currentTask = state.tasks[taskId];
+        if (currentTask === undefined) {
+          return;
+        }
+
+        const currentBoard = state.boards[state.currentBoardId as string];
+        if (currentBoard === undefined) {
+          return;
+        }
+
+        const currentColumnIds = currentBoard.columnIds;
+        const currentColumns = state.columns;
+
+        const columnId = currentColumnIds[0];
+        const column = currentColumns[columnId as string];
+        if (column === undefined) {
+          return;
+        }
+
+        column.taskIds = column.taskIds.filter((id) => id !== taskId);
+        delete state.tasks[taskId];
+      }),
+    );
+  },
+
   resetStore: () => {
     set({
       boards: {},
