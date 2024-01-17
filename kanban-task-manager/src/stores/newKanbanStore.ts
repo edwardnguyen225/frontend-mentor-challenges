@@ -41,6 +41,7 @@ interface KanbanStore {
     [key: string]: Task;
   };
 
+  getCurrentBoard: () => Board | undefined;
   openBoard: (boardId: string) => void;
   addBoard: (boardName: Board['name'], columns: Column['name'][]) => void;
   removeBoard: (boardId: string) => void;
@@ -55,15 +56,46 @@ interface KanbanStore {
   updateTask: (task: Task) => void;
   removeTask: (taskId: Task['id']) => void;
 
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
+  isSidebarOpen: boolean;
+  hideSidebar: () => void;
+  showSidebar: () => void;
+
   // For testing purposes
   resetStore?: () => void;
 }
-
-export const useKanbanStore = create<KanbanStore>((set, get) => ({
-  boards: {},
-  currentBoardId: null,
+const DUMMY_BOARD: Board = {
+  id: uuidv4(),
+  name: 'New Empty Board',
+  columnIds: [],
+};
+const SECOND_DUMMY_BOARD: Board = {
+  id: uuidv4(),
+  name: 'Second Empty Board',
+  columnIds: [],
+};
+const INIT_STATE: Pick<
+  KanbanStore,
+  'boards' | 'currentBoardId' | 'columns' | 'tasks' | 'theme' | 'isSidebarOpen'
+> = {
+  boards: {
+    [DUMMY_BOARD.id]: DUMMY_BOARD,
+    [SECOND_DUMMY_BOARD.id]: SECOND_DUMMY_BOARD,
+  },
+  currentBoardId: DUMMY_BOARD.id,
   columns: {},
   tasks: {},
+  isSidebarOpen: true,
+  theme: 'light',
+};
+
+export const useKanbanStore = create<KanbanStore>((set, get) => ({
+  ...INIT_STATE,
+
+  getCurrentBoard: () => {
+    return get().boards[get().currentBoardId as string];
+  },
 
   openBoard: (boardId: string) => {
     set(
@@ -135,6 +167,21 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         taskIdsToBeRemoved.forEach((taskId) => {
           delete state.tasks[taskId];
         });
+
+        // If the current board is removed, open the first board
+        if (state.currentBoardId === boardId) {
+          let firstBoardId = Object.keys(state.boards)[0];
+          // If there is no board left, create a new board
+          if (firstBoardId === undefined) {
+            firstBoardId = uuidv4();
+            state.boards[uuidv4()] = {
+              id: firstBoardId,
+              name: 'New Board',
+              columnIds: [],
+            };
+          }
+          state.currentBoardId = firstBoardId;
+        }
       }),
     );
   },
@@ -308,12 +355,40 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     );
   },
 
+  setTheme: (theme) => {
+    const body = document.querySelector('body');
+    if (body) {
+      if (theme === 'dark') {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+    }
+
+    set(
+      produce((state: KanbanStore) => {
+        state.theme = theme;
+      }),
+    );
+  },
+
+  hideSidebar: () => {
+    set(
+      produce((state: KanbanStore) => {
+        state.isSidebarOpen = false;
+      }),
+    );
+  },
+
+  showSidebar: () => {
+    set(
+      produce((state: KanbanStore) => {
+        state.isSidebarOpen = true;
+      }),
+    );
+  },
+
   resetStore: () => {
-    set({
-      boards: {},
-      currentBoardId: null,
-      columns: {},
-      tasks: {},
-    });
+    set(INIT_STATE);
   },
 }));

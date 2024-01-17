@@ -8,10 +8,10 @@ import Typography from '../../components/Typography';
 
 const EmptyBoard: React.FC = () => {
   const { openBoardModal } = useBoardModalStore();
-
   const t = useTranslations('Board');
+
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
       <Typography variant="heading-lg" className="text-medium-grey">
         {t('empty_board_desc')}
       </Typography>

@@ -1,13 +1,15 @@
 import Typography from '@/components/Typography';
-import type { Task } from '@/types/kanban';
+import { useKanbanStore } from '@/stores/newKanbanStore';
 
 import TaskCard from './TaskCard';
 
 interface ColumnProps {
+  columnId: string;
   name: string;
-  tasks: Task[];
 }
-const Column: React.FC<ColumnProps> = ({ name, tasks }) => {
+const Column: React.FC<ColumnProps> = ({ columnId, name }) => {
+  const { getTasksByColumnId } = useKanbanStore();
+  const tasks = getTasksByColumnId(columnId);
   const numTasks = tasks.length;
   return (
     <div className="mb-2 rounded-lg">

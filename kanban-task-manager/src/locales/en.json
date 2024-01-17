@@ -4,6 +4,8 @@
     "add_new_task": "+ Add New Task"
   },
   "Board": {
+    "all_boards": "All Boards ({count})",
+    "create_new_board": "+ Create New Board",
     "edit_board": "Edit Board",
     "empty_board_desc": "This board is empty. Create a new column to get started.",
     "add_new_column": "+ Add New Column",
@@ -12,6 +14,7 @@
     "board_columns": "Board Columns",
     "save_changes": "Save Changes",
     "subtasks_and_count": "Subtasks ({count} of {total})",
-    "current_status": "Current Status"
+    "current_status": "Current Status",
+    "hide_sidebar": "Hide Sidebar"
   }
 }

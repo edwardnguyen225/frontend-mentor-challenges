@@ -2,16 +2,18 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import Typography from '@/components/Typography';
-import { useBoardModalStore, useBoardStore } from '@/stores/KanbanStore';
+import { useBoardModalStore } from '@/stores/KanbanStore';
+import { useKanbanStore } from '@/stores/newKanbanStore';
 
 import Column from './Column';
 import EmptyBoard from './EmptyBoard';
 
 const Board: React.FC = () => {
-  const { columns } = useBoardStore();
+  const { getCurrentColumns } = useKanbanStore();
   const { openBoardModal } = useBoardModalStore();
   const t = useTranslations('Board');
 
+  const columns = getCurrentColumns();
   if (columns.length === 0) {
     return <EmptyBoard />;
   }
@@ -19,7 +21,7 @@ const Board: React.FC = () => {
   return (
     <div className="flex gap-6 overflow-x-auto p-6">
       {columns.map((col) => (
-        <Column key={`column-${col.name}`} name={col.name} tasks={col.tasks} />
+        <Column columnId={col.id} key={`column-${col.name}`} name={col.name} />
       ))}
       <button
         type="button"

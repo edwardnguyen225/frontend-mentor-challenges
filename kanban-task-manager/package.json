@@ -2,6 +2,7 @@
   "name": "kanban-task-manager",
   "version": "0.0.1",
   "scripts": {
+    "make-prompts": "node --experimental-json-modules build/make_conversion.mjs",
     "dev:spotlight": "spotlight-sidecar",
     "dev:next": "next dev",
     "dev": "run-p dev:*",
@@ -37,6 +38,7 @@
     "checkly": "^4.5.2",
     "classix": "^2.1.35",
     "drizzle-orm": "^0.29.2",
+    "fs": "^0.0.1-security",
     "immer": "^10.0.3",
     "next": "^14.0.4",
     "next-intl": "^3.4.0",
