@@ -2,15 +2,14 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import Typography from '@/components/Typography';
-import { useBoardModalStore } from '@/stores/KanbanStore';
-import { useKanbanStore } from '@/stores/newKanbanStore';
+import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
 
 import Column from './Column';
 import EmptyBoard from './EmptyBoard';
 
 const Board: React.FC = () => {
   const { getCurrentColumns } = useKanbanStore();
-  const { openBoardModal } = useBoardModalStore();
+  const { openAddBoardModal } = useModalStore();
   const t = useTranslations('Board');
 
   const columns = getCurrentColumns();
@@ -26,7 +25,7 @@ const Board: React.FC = () => {
       <button
         type="button"
         className="mt-[38px] flex h-[80vh] w-[280px] shrink-0 items-center justify-center rounded-md bg-gray-300 hover:bg-gray-300/65"
-        onClick={openBoardModal}
+        onClick={openAddBoardModal}
       >
         <Typography variant="heading-xl" className="text-medium-grey">
           + {t('new_column')}

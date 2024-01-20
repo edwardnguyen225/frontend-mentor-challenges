@@ -3,31 +3,13 @@ import { produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-interface Board {
-  id: string;
-  name: string;
-  columnIds: string[];
-}
-
-interface Column {
-  id: string;
-  name: string;
-  taskIds: string[];
-}
-
-interface Subtask {
-  id: string;
-  title: string;
-  isCompleted: boolean;
-}
-
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  status: Column['name'];
-  subtasks: Subtask[];
-}
+import type {
+  Board,
+  Column,
+  ModalState,
+  ModalType,
+  Task,
+} from '@/types/kanban';
 
 interface KanbanStore {
   boards: {
@@ -62,6 +44,11 @@ interface KanbanStore {
   hideSidebar: () => void;
   showSidebar: () => void;
 
+  // Modal related properties and methods
+  modal: ModalState;
+  openModal: (type: ModalType, props?: Record<string, any>) => void;
+  closeModal: () => void;
+
   // For testing purposes
   resetStore?: () => void;
 }
@@ -77,7 +64,13 @@ const SECOND_DUMMY_BOARD: Board = {
 };
 const INIT_STATE: Pick<
   KanbanStore,
-  'boards' | 'currentBoardId' | 'columns' | 'tasks' | 'theme' | 'isSidebarOpen'
+  | 'boards'
+  | 'currentBoardId'
+  | 'columns'
+  | 'tasks'
+  | 'theme'
+  | 'isSidebarOpen'
+  | 'modal'
 > = {
   boards: {
     [DUMMY_BOARD.id]: DUMMY_BOARD,
@@ -88,6 +81,12 @@ const INIT_STATE: Pick<
   tasks: {},
   isSidebarOpen: true,
   theme: 'light',
+
+  modal: {
+    isOpen: false,
+    type: null,
+    props: null,
+  },
 };
 
 export const useKanbanStore = create<KanbanStore>((set, get) => ({
@@ -388,7 +387,75 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     );
   },
 
+  // Method to open a modal
+  openModal: (type, props = {}) => {
+    set(
+      produce((state: KanbanStore) => {
+        state.modal.isOpen = true;
+        state.modal.type = type;
+        state.modal.props = props;
+      }),
+    );
+  },
+
+  // Method to close a modal
+  closeModal: () => {
+    set(
+      produce((state: KanbanStore) => {
+        state.modal.isOpen = false;
+        state.modal.type = null;
+        state.modal.props = null;
+      }),
+    );
+  },
+
   resetStore: () => {
     set(INIT_STATE);
   },
 }));
+
+export const useModalStore = () => {
+  const { modal, openModal, closeModal } = useKanbanStore();
+
+  const openAddBoardModal = () => {
+    openModal('add-board');
+  };
+
+  const openEditBoardModal = () => {
+    openModal('edit-board');
+  };
+
+  const openDeleteBoardModal = () => {
+    openModal('delete-board');
+  };
+
+  const openAddTaskModal = () => {
+    openModal('add-task');
+  };
+
+  const openViewTaskModal = (taskId: string) => {
+    openModal('view-task', { taskId });
+  };
+
+  const openEditTaskModal = (taskId: string) => {
+    openModal('edit-task', { taskId });
+  };
+
+  const openDeleteTaskModal = (taskId: string) => {
+    openModal('delete-task', { taskId });
+  };
+
+  return {
+    modal,
+    openAddBoardModal,
+    openEditBoardModal,
+    openDeleteBoardModal,
+
+    openAddTaskModal,
+    openViewTaskModal,
+    openEditTaskModal,
+    openDeleteTaskModal,
+
+    closeModal,
+  };
+};

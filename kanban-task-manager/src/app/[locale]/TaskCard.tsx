@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import Typography from '@/components/Typography';
-import { useBoardStore } from '@/stores/KanbanStore';
+import { useModalStore } from '@/stores/newKanbanStore';
 import type { Task } from '@/types/kanban';
 
 interface TaskProps {
@@ -9,9 +9,7 @@ interface TaskProps {
 }
 
 const TaskCard: React.FC<TaskProps> = ({ task }) => {
-  const {
-    taskModal: { openViewTaskModal },
-  } = useBoardStore();
+  const { openViewTaskModal } = useModalStore();
   const t = useTranslations('Board');
   const totalSubtasks = task.subtasks.length;
   const numDoneSubtasks = task.subtasks.filter(
@@ -19,7 +17,7 @@ const TaskCard: React.FC<TaskProps> = ({ task }) => {
   ).length;
 
   const handleOpenViewTaskModal = () => {
-    openViewTaskModal(task);
+    openViewTaskModal(task.id);
   };
 
   return (

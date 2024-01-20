@@ -2,8 +2,7 @@ import cx from 'classix';
 import { useTranslations } from 'next-intl';
 import React, { useCallback } from 'react';
 
-import { useBoardModalStore } from '@/stores/KanbanStore';
-import { useKanbanStore } from '@/stores/newKanbanStore';
+import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
 
 import Typography from '../Typography';
 
@@ -59,7 +58,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
 };
 
 const ButtonCreateBoard: React.FC = () => {
-  const { openBoardModal } = useBoardModalStore();
+  const { openAddBoardModal } = useModalStore();
   const t = useTranslations('Board');
 
   return (
@@ -69,7 +68,7 @@ const ButtonCreateBoard: React.FC = () => {
       style={{
         width: 'calc(100% - 24px)',
       }}
-      onClick={openBoardModal}
+      onClick={openAddBoardModal}
     >
       <IconBoard className="fill-main-purple" />
       <Typography

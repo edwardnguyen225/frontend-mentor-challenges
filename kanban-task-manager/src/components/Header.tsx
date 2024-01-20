@@ -7,15 +7,14 @@ import React from 'react';
 
 import IconVerticalEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 import LogoDark from '@/public/assets/logo-dark.svg';
-import { useBoardModalStore } from '@/stores/KanbanStore';
-import { useKanbanStore } from '@/stores/newKanbanStore';
+import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
 
 import Button from './Button';
 import Typography from './Typography';
 
 const Header: React.FC = () => {
   const { isSidebarOpen, getCurrentBoard } = useKanbanStore();
-  const { openBoardModal } = useBoardModalStore();
+  const { openEditBoardModal } = useModalStore();
   const t = useTranslations('Header');
 
   const currentBoard = getCurrentBoard();
@@ -53,7 +52,7 @@ const Header: React.FC = () => {
           <button
             type="button"
             className="flex h-12 w-12 items-center justify-center rounded-full hover:bg-light-grey"
-            onClick={openBoardModal}
+            onClick={openEditBoardModal}
             aria-label="Open Board Settings"
           >
             <Image

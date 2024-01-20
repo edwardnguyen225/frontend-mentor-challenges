@@ -1,17 +1,22 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { useBoardModalStore } from '@/stores/KanbanStore';
+import { useModalStore } from '@/stores/newKanbanStore';
 
 import Button from '../../components/Button';
 import Typography from '../../components/Typography';
 
+// TODO: Fix overflow
 const EmptyBoard: React.FC = () => {
-  const { openBoardModal } = useBoardModalStore();
+  const { openModal } = useModalStore();
   const t = useTranslations('Board');
 
+  const openEditBoardModal = () => {
+    openModal('edit-board');
+  };
+
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <Typography variant="heading-lg" className="text-medium-grey">
         {t('empty_board_desc')}
       </Typography>
@@ -19,7 +24,7 @@ const EmptyBoard: React.FC = () => {
         variant="primary"
         className="mt-8"
         size="L"
-        onClick={openBoardModal}
+        onClick={openEditBoardModal}
       >
         {t('add_new_column')}
       </Button>
