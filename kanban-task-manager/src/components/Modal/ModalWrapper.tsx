@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
+import cx from 'classix';
 import { Fragment, useCallback, useEffect } from 'react';
 
 export interface ModalWrapperProps {
@@ -55,7 +56,12 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel
+                className={cx(
+                  'w-full max-w-md overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all',
+                  'dark:bg-dark-grey dark:text-white',
+                )}
+              >
                 {children}
               </Dialog.Panel>
             </Transition.Child>

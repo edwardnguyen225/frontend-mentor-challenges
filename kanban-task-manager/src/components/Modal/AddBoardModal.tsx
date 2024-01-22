@@ -180,7 +180,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
                   aria-label="Remove"
                   className="group ml-4"
                 >
-                  <IconCross className="fill-medium-grey group-hover:fill-slate-800" />
+                  <IconCross className="fill-medium-grey group-hover:fill-slate-800 dark:group-hover:fill-white" />
                 </button>
               </li>
             ))}
