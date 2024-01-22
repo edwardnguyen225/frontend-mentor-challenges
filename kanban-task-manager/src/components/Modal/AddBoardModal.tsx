@@ -195,7 +195,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
               type="button"
               className="w-full"
               variant="secondary"
-              size="L"
+              size="S"
               onClick={handleAddNewColumn}
             >
               {t('board_modal.add_new_column')}
@@ -207,7 +207,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
           type="submit"
           className="mt-6 w-full"
           variant="primary"
-          size="L"
+          size="S"
         >
           {t('board_modal.create_board')}
         </Button>
