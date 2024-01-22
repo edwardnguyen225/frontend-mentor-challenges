@@ -36,10 +36,13 @@ const Typography: React.FC<TypographyProps> = ({
   className = '',
   children,
 }) => {
+  const isCustomColor =
+    className.includes('text-') || className.includes('dark:text-');
+
   return (
     <p
       className={cx(
-        typographyColors[variant],
+        !isCustomColor && typographyColors[variant],
         typographyStyles[variant],
         className,
       )}
