@@ -1,3 +1,5 @@
+import { Switch } from '@headlessui/react';
+import cx from 'classix';
 import React from 'react';
 
 import { useKanbanStore } from '@/stores/newKanbanStore';
@@ -51,17 +53,23 @@ const ThemeController = () => {
         className="hidden"
         id="theme-switcher"
       />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label
-        htmlFor="theme-switcher"
-        className="flex h-8 w-14 cursor-pointer items-center rounded-full bg-main-purple p-1"
+      <Switch
+        checked={isToggleRight}
+        onChange={handleToggle}
+        className={cx(
+          'bg-main-purple',
+          'relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75',
+        )}
       >
-        <div
-          className={`h-6 w-6 rounded-full bg-white shadow-md duration-300 ${
-            isToggleRight ? 'translate-x-6' : 'translate-x-0'
-          }`}
+        <span className="sr-only">Theme Setting</span>
+        <span
+          aria-hidden="true"
+          className={cx(
+            isToggleRight ? 'translate-x-7' : 'translate-x-0',
+            'pointer-events-none inline-block h-6 w-6 rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
+          )}
         />
-      </label>
+      </Switch>
       <IconDarkTheme className="fill-medium-grey" />
     </div>
   );
