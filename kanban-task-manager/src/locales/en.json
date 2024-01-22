@@ -31,7 +31,11 @@
       "create_board": "Create New Board",
       "todo": "To Do",
       "doing": "Doing",
-      "done": "Done"
+      "done": "Done",
+      "edit_board": "Edit Board",
+      "board_name": "Board Name",
+      "board_columns": "Board Columns",
+      "save_changes": "Save Changes"
     },
     "delete_board_modal": {
       "title": "Delete this board?",

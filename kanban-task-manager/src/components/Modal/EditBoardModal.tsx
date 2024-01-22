@@ -11,7 +11,7 @@ import Button from '../Button';
 import Typography, { typographyStyles } from '../Typography';
 import ModalWrapper from './ModalWrapper';
 
-export interface AddBoardModalProps {
+export interface EditBoardModalProps {
   isOpen: boolean;
   closeModal: () => void;
 }
@@ -31,16 +31,28 @@ const BoardFormSchema = (t: (arg: string) => string) =>
     name: z.string({
       required_error: t('errors.required_error'),
     }),
-    columns: z.string().array(),
+    columns: z
+      .object({
+        name: z.string(),
+        id: z.string().optional(),
+      })
+      .array(),
   });
 
-const AddBoardModal: React.FC<AddBoardModalProps> = ({
+const EditBoardModal: React.FC<EditBoardModalProps> = ({
   isOpen,
   closeModal,
 }) => {
   const t = useTranslations('Board');
   const formSchema = BoardFormSchema(t);
-  const { addBoard, openBoard } = useKanbanStore();
+  const {
+    currentBoardId,
+    updateCurrentBoardName,
+    updateCurrentColumns,
+    getCurrentBoard,
+    getCurrentColumns,
+  } = useKanbanStore();
+
   const {
     control,
     register,
@@ -51,12 +63,8 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      columns: [
-        t('board_modal.todo'),
-        t('board_modal.doing'),
-        t('board_modal.done'),
-      ],
+      name: getCurrentBoard()?.name,
+      columns: getCurrentColumns(),
     },
   });
 
@@ -67,9 +75,13 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
 
   useEffect(() => {
     if (!isOpen) {
-      reset();
+      reset({
+        name: getCurrentBoard()?.name,
+        columns: getCurrentColumns(),
+      });
     }
-  }, [isOpen, reset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentBoardId, isOpen]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name.trim() === '') {
@@ -82,7 +94,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
 
     let hasUnnamedColumn = false;
     values.columns.forEach((column) => {
-      if (column.trim() === '') {
+      if (column.name.trim() === '') {
         hasUnnamedColumn = true;
       }
     });
@@ -94,19 +106,22 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
       return;
     }
 
-    const { id: newBoardId } = await addBoard(values.name, values.columns);
+    updateCurrentBoardName(values.name);
+    updateCurrentColumns(values.columns);
+
     closeModal();
-    openBoard(newBoardId);
   };
 
   const handleAddNewColumn = () => {
-    append(t('board_modal.new_column'));
+    append({
+      name: t('board_modal.new_column'),
+    });
   };
 
   return (
     <ModalWrapper isOpen={isOpen} closeModal={closeModal}>
       <Typography variant="heading-lg" className="mb-6">
-        {t('board_modal.add_new_board')}
+        {t('board_modal.edit_board')}
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,7 +133,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
               'dark:text-white',
             )}
           >
-            {t('board_modal.name')}
+            {t('board_modal.board_name')}
           </label>
 
           {/* TODO: Split out to TextField */}
@@ -133,7 +148,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
                 'placeholder:text-black/25)',
                 'focus:border-main-purple active:border-main-purple',
                 errors.name?.message &&
-                  'border-red focus:border-red active:border-red dark:border-red dark:focus:border-red dark:active:border-red',
+                  'border-red focus:border-red active:border-red',
                 'dark:bg-dark-grey dark:border-lines-dark dark:text-white dark:placeholder:text-lines-dark',
               )}
               {...register('name', { required: true })}
@@ -155,7 +170,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
               'dark:text-white',
             )}
           >
-            {t('board_modal.columns')}
+            {t('board_modal.board_columns')}
           </label>
 
           <ul className="flex flex-col gap-3">
@@ -169,10 +184,10 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
                     'placeholder:text-black/25)',
                     'focus:border-main-purple active:border-main-purple',
                     errors.columns?.message &&
-                      'border-red focus:border-red active:border-red dark:border-red dark:focus:border-red dark:active:border-red',
+                      'border-red focus:border-red active:border-red',
                     'dark:bg-dark-grey dark:border-lines-dark dark:text-white dark:placeholder:text-lines-dark',
                   )}
-                  {...register(`columns.${index}`)}
+                  {...register(`columns.${index}.name`)}
                 />
                 <button
                   type="button"
@@ -209,11 +224,11 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
           variant="primary"
           size="S"
         >
-          {t('board_modal.create_board')}
+          {t('board_modal.save_changes')}
         </Button>
       </form>
     </ModalWrapper>
   );
 };
 
-export default AddBoardModal;
+export default EditBoardModal;

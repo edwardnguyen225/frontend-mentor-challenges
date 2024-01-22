@@ -4,6 +4,7 @@ import { useModalStore } from '@/stores/newKanbanStore';
 
 import AddBoardModal from './AddBoardModal';
 import DeleteBoardModal from './DeleteBoardModal';
+import EditBoardModal from './EditBoardModal';
 
 const ModalController = () => {
   const {
@@ -25,6 +26,11 @@ const ModalController = () => {
       />
       <DeleteBoardModal
         isOpen={isOpen && type === 'delete-board'}
+        closeModal={closeModal}
+        {...props}
+      />
+      <EditBoardModal
+        isOpen={isOpen && type === 'edit-board'}
         closeModal={closeModal}
         {...props}
       />
