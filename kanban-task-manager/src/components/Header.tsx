@@ -5,16 +5,15 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import IconVerticalEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 import LogoDark from '@/public/assets/logo-dark.svg';
-import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
+import { useKanbanStore } from '@/stores/newKanbanStore';
 
+import BoardMenu from './BoardMenu';
 import Button from './Button';
 import Typography from './Typography';
 
 const Header: React.FC = () => {
   const { isSidebarOpen, getCurrentBoard } = useKanbanStore();
-  const { openEditBoardModal } = useModalStore();
   const t = useTranslations('Header');
 
   const currentBoard = getCurrentBoard();
@@ -49,18 +48,7 @@ const Header: React.FC = () => {
           >
             {t('add_new_task')}
           </Button>
-          <button
-            type="button"
-            className="flex h-12 w-12 items-center justify-center rounded-full hover:bg-light-grey"
-            onClick={openEditBoardModal}
-            aria-label="Open Board Settings"
-          >
-            <Image
-              src={IconVerticalEllipsis}
-              alt="Open Board Settings"
-              width={5}
-            />
-          </button>
+          <BoardMenu />
         </div>
       </div>
     </header>

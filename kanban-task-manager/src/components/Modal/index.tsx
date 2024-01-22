@@ -3,6 +3,7 @@ import React from 'react';
 import { useModalStore } from '@/stores/newKanbanStore';
 
 import AddBoardModal from './AddBoardModal';
+import DeleteBoardModal from './DeleteBoardModal';
 
 const ModalController = () => {
   const {
@@ -16,11 +17,18 @@ const ModalController = () => {
    */
 
   return (
-    <AddBoardModal
-      isOpen={isOpen && type === 'add-board'}
-      closeModal={closeModal}
-      {...props}
-    />
+    <>
+      <AddBoardModal
+        isOpen={isOpen && type === 'add-board'}
+        closeModal={closeModal}
+        {...props}
+      />
+      <DeleteBoardModal
+        isOpen={isOpen && type === 'delete-board'}
+        closeModal={closeModal}
+        {...props}
+      />
+    </>
   );
 };
 

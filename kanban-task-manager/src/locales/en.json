@@ -7,6 +7,7 @@
     "all_boards": "All Boards ({count})",
     "create_new_board": "+ Create New Board",
     "edit_board": "Edit Board",
+    "delete_board": "Delete Board",
     "empty_board_desc": "This board is empty. Create a new column to get started.",
     "add_new_column": "+ Add New Column",
     "new_column": "New Column",
@@ -31,6 +32,12 @@
       "todo": "To Do",
       "doing": "Doing",
       "done": "Done"
+    },
+    "delete_board_modal": {
+      "title": "Delete this board?",
+      "description": "Are you sure you want to delete the {name} board? This action will remove all columns and tasks and cannot be reversed.",
+      "delete": "Delete",
+      "cancel": "Cancel"
     }
   }
 }
