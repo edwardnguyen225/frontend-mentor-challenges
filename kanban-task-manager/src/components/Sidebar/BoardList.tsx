@@ -49,7 +49,10 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
       <IconBoard className={cx(isActive ? 'fill-white' : 'fill-medium-grey')} />
       <Typography
         variant="heading-md"
-        className={cx(isActive ? 'text-white' : 'text-medium-grey')}
+        className={cx(
+          'text-left',
+          isActive ? 'text-white' : 'text-medium-grey',
+        )}
       >
         {name}
       </Typography>
@@ -73,7 +76,7 @@ const ButtonCreateBoard: React.FC = () => {
       <IconBoard className="fill-main-purple" />
       <Typography
         variant="heading-md"
-        className="text-main-purple dark:text-main-purple"
+        className="text-left text-main-purple dark:text-main-purple"
       >
         {t('create_new_board')}
       </Typography>

@@ -25,7 +25,12 @@ interface KanbanStore {
 
   getCurrentBoard: () => Board | undefined;
   openBoard: (boardId: string) => void;
-  addBoard: (boardName: Board['name'], columns: Column['name'][]) => void;
+  addBoard: (
+    boardName: Board['name'],
+    columns: Column['name'][],
+  ) => {
+    id: string;
+  };
   removeBoard: (boardId: string) => void;
   updateCurrentBoardName: (newName: string) => void;
 
@@ -89,6 +94,9 @@ const INIT_STATE: Pick<
   },
 };
 
+/**
+ * TODO: Add feature to persist data to local storage
+ */
 export const useKanbanStore = create<KanbanStore>((set, get) => ({
   ...INIT_STATE,
 
@@ -136,6 +144,10 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         );
       }),
     );
+
+    return {
+      id: boardId,
+    };
   },
   removeBoard: (boardId) => {
     set(

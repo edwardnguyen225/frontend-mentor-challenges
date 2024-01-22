@@ -15,6 +15,22 @@
     "save_changes": "Save Changes",
     "subtasks_and_count": "Subtasks ({count} of {total})",
     "current_status": "Current Status",
-    "hide_sidebar": "Hide Sidebar"
+    "hide_sidebar": "Hide Sidebar",
+    "errors": {
+      "required_error": "Can't be empty",
+      "has_unnamed_column": "Has Unnamed Column"
+    },
+    "board_modal": {
+      "add_new_board": "Add New Board",
+      "name": "Name",
+      "name_placeholder": "e.g. Web Design",
+      "columns": "Columns",
+      "add_new_column": "+ Add New Column",
+      "new_column": "New Column",
+      "create_board": "Create New Board",
+      "todo": "To Do",
+      "doing": "Doing",
+      "done": "Done"
+    }
   }
 }

@@ -4,8 +4,9 @@ import React from 'react';
 import { typographyStyles } from './Typography';
 
 interface ButtonProps {
+  type?: 'submit' | 'reset' | 'button' | undefined;
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: 'primary' | 'secondary' | 'destructive';
   className?: string;
   size?: 'L' | 'S';
@@ -35,6 +36,7 @@ const sizes = {
 };
 
 const Button: React.FC<ButtonProps> = ({
+  type = 'button',
   children,
   onClick,
   variant = 'primary',
@@ -44,7 +46,8 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       className={cx(
         colors[variant],
         sizes[size],
