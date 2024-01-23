@@ -7,7 +7,6 @@ const meta: Meta<typeof TextField> = {
   args: {
     label: 'Text Field',
     placeholder: 'Enter task name',
-    required: true,
   },
 };
 

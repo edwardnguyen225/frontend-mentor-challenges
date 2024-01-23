@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { useKanbanStore } from '@/stores/newKanbanStore';
 
 import Button from '../Button';
+import TextField from '../TextField';
 import Typography, { typographyStyles } from '../Typography';
 import ModalWrapper from './ModalWrapper';
 
@@ -110,42 +111,12 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={cx('flex flex-col')}>
-          <label
-            htmlFor="text-input"
-            className={cx(
-              'mb-2 text-xs text-medium-grey font-bold',
-              'dark:text-white',
-            )}
-          >
-            {t('board_modal.name')}
-          </label>
-
-          {/* TODO: Split out to TextField */}
-          <div className="relative flex w-full">
-            <input
-              type="text"
-              placeholder={t('board_modal.name_placeholder')}
-              className={cx(
-                'w-full',
-                typographyStyles['body-lg'],
-                'rounded border border-black/25 px-4 py-2',
-                'placeholder:text-black/25)',
-                'focus:border-main-purple active:border-main-purple',
-                errors.name?.message &&
-                  'border-red focus:border-red active:border-red dark:border-red dark:focus:border-red dark:active:border-red',
-                'dark:bg-dark-grey dark:border-lines-dark dark:text-white dark:placeholder:text-lines-dark',
-              )}
-              {...register('name', { required: true })}
-              aria-invalid={errors.name ? 'true' : 'false'}
-            />
-            {errors.name && (
-              <p className="absolute right-4 mt-2 text-red">
-                {errors.name.message}
-              </p>
-            )}
-          </div>
-        </div>
+        <TextField
+          control={control as any}
+          name="name"
+          rules={{ required: true }}
+          label={t('board_modal.add_new_board')}
+        />
 
         <div className="mt-6 flex w-full flex-col">
           <label
