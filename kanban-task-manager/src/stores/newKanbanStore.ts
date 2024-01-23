@@ -437,6 +437,10 @@ export const useModalStore = () => {
     openModal('edit-board');
   };
 
+  const openEditBoardAndAddNewColumn = () => {
+    openModal('edit-board', { isAddingColumn: true });
+  };
+
   const openDeleteBoardModal = () => {
     openModal('delete-board');
   };
@@ -467,6 +471,8 @@ export const useModalStore = () => {
     openViewTaskModal,
     openEditTaskModal,
     openDeleteTaskModal,
+
+    openEditBoardAndAddNewColumn,
 
     closeModal,
   };

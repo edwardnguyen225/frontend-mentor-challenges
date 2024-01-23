@@ -14,6 +14,7 @@ import ModalWrapper from './ModalWrapper';
 export interface EditBoardModalProps {
   isOpen: boolean;
   closeModal: () => void;
+  isAddingColumn?: boolean;
 }
 
 const IconCross: React.FC<{ className?: string }> = ({ className }) => (
@@ -42,6 +43,7 @@ const BoardFormSchema = (t: (arg: string) => string) =>
 const EditBoardModal: React.FC<EditBoardModalProps> = ({
   isOpen,
   closeModal,
+  isAddingColumn,
 }) => {
   const t = useTranslations('Board');
   const formSchema = BoardFormSchema(t);
@@ -60,6 +62,7 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
     formState: { errors },
     setError,
     reset,
+    setFocus,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,14 +77,29 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
   });
 
   useEffect(() => {
-    if (!isOpen) {
+    return () => {
       reset({
         name: getCurrentBoard()?.name,
         columns: getCurrentColumns(),
       });
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentBoardId, isOpen]);
+
+  const handleAddNewColumn = () => {
+    append({
+      name: t('board_modal.new_column'),
+    });
+  };
+
+  useEffect(() => {
+    if (isAddingColumn) {
+      handleAddNewColumn();
+      const lastColumnIndex = fields.length - 1;
+      setFocus(`columns.${lastColumnIndex}.name`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAddingColumn]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name.trim() === '') {
@@ -110,12 +128,6 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
     updateCurrentColumns(values.columns);
 
     closeModal();
-  };
-
-  const handleAddNewColumn = () => {
-    append({
-      name: t('board_modal.new_column'),
-    });
   };
 
   return (

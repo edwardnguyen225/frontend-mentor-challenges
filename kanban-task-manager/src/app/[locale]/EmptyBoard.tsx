@@ -8,12 +8,8 @@ import Typography from '../../components/Typography';
 
 // TODO: Fix overflow
 const EmptyBoard: React.FC = () => {
-  const { openModal } = useModalStore();
+  const { openEditBoardAndAddNewColumn } = useModalStore();
   const t = useTranslations('Board');
-
-  const openEditBoardModal = () => {
-    openModal('edit-board');
-  };
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
@@ -24,7 +20,7 @@ const EmptyBoard: React.FC = () => {
         variant="primary"
         className="mt-8"
         size="L"
-        onClick={openEditBoardModal}
+        onClick={openEditBoardAndAddNewColumn}
       >
         {t('add_new_column')}
       </Button>
