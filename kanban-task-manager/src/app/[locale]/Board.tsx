@@ -1,3 +1,4 @@
+import cx from 'classix';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -9,10 +10,11 @@ import EmptyBoard from './EmptyBoard';
 
 const Board: React.FC = () => {
   const { getCurrentColumns } = useKanbanStore();
+  const columns = getCurrentColumns();
+
   const { openEditBoardAndAddNewColumn } = useModalStore();
   const t = useTranslations('Board');
 
-  const columns = getCurrentColumns();
   if (columns.length === 0) {
     return <EmptyBoard />;
   }
@@ -20,7 +22,12 @@ const Board: React.FC = () => {
   return (
     <div className="flex gap-6 overflow-x-auto p-6">
       {columns.map((col) => (
-        <Column columnId={col.id} key={`column-${col.name}`} name={col.name} />
+        <Column
+          className={cx('grow-0 shrink-0 w-[280px]')}
+          columnId={col.id}
+          key={`column-${col.name}`}
+          name={col.name}
+        />
       ))}
       <button
         type="button"

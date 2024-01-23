@@ -17,6 +17,7 @@
     "subtasks_and_count": "Subtasks ({count} of {total})",
     "current_status": "Current Status",
     "hide_sidebar": "Hide Sidebar",
+    "no_tasks": "No tasks yet",
     "errors": {
       "required_error": "Can't be empty",
       "has_unnamed_column": "Has Unnamed Column"
