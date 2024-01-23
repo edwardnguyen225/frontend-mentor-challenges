@@ -44,6 +44,13 @@ module.exports = {
         red: '#ea5555',
         'red-hover': '#ff9898',
       },
+      backgroundImage: {
+        'new-column':
+          'linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.50) 100%)',
+
+        'new-column-dark':
+          'linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.13) 100%)',
+      },
     },
   },
   plugins: [],
