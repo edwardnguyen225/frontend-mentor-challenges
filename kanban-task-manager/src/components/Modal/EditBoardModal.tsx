@@ -185,7 +185,7 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
             {t('board_modal.board_columns')}
           </label>
 
-          <ul className="flex flex-col gap-3">
+          <ul className="flex max-h-[196px] flex-col gap-3 overflow-y-auto">
             {fields.map((field, index) => (
               <li key={field.id} className="relative flex w-full">
                 <input
@@ -211,23 +211,23 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
                 </button>
               </li>
             ))}
-
-            {errors.columns && (
-              <Typography variant="body-md" className="text-red">
-                {errors.columns.message}
-              </Typography>
-            )}
-
-            <Button
-              type="button"
-              className="w-full"
-              variant="secondary"
-              size="S"
-              onClick={handleAddNewColumn}
-            >
-              {t('board_modal.add_new_column')}
-            </Button>
           </ul>
+
+          {errors.columns && (
+            <Typography variant="body-md" className="mt-3 text-red">
+              {errors.columns.message}
+            </Typography>
+          )}
+
+          <Button
+            type="button"
+            className="mt-3 w-full"
+            variant="secondary"
+            size="S"
+            onClick={handleAddNewColumn}
+          >
+            {t('board_modal.add_new_column')}
+          </Button>
         </div>
 
         <Button

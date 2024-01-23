@@ -184,23 +184,23 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({
                 </button>
               </li>
             ))}
-
-            {errors.columns && (
-              <Typography variant="body-md" className="text-red">
-                {errors.columns.message}
-              </Typography>
-            )}
-
-            <Button
-              type="button"
-              className="w-full"
-              variant="secondary"
-              size="S"
-              onClick={handleAddNewColumn}
-            >
-              {t('board_modal.add_new_column')}
-            </Button>
           </ul>
+
+          {errors.columns && (
+            <Typography variant="body-md" className="mt-3 text-red">
+              {errors.columns.message}
+            </Typography>
+          )}
+
+          <Button
+            type="button"
+            className="mt-3 w-full"
+            variant="secondary"
+            size="S"
+            onClick={handleAddNewColumn}
+          >
+            {t('board_modal.add_new_column')}
+          </Button>
         </div>
 
         <Button
