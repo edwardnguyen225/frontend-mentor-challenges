@@ -1,3 +1,4 @@
+import cx from 'classix';
 import { useTranslations } from 'next-intl';
 
 import Typography from '@/components/Typography';
@@ -5,13 +6,21 @@ import { useKanbanStore } from '@/stores/newKanbanStore';
 
 import TaskCard from './TaskCard';
 
+const colorDict = ['bg-[#49C4E5]', 'bg-[#8471F2]', 'bg-[#67E2AE]'];
+
 interface ColumnProps {
+  index: number;
   columnId: string;
   name: string;
   className?: string;
 }
 
-const Column: React.FC<ColumnProps> = ({ columnId, name, className }) => {
+const Column: React.FC<ColumnProps> = ({
+  index,
+  columnId,
+  name,
+  className,
+}) => {
   const t = useTranslations('Board');
   const { getTasksByColumnId } = useKanbanStore();
   const tasks = getTasksByColumnId(columnId);
@@ -20,7 +29,12 @@ const Column: React.FC<ColumnProps> = ({ columnId, name, className }) => {
   return (
     <div className={className}>
       <div className="mb-6 flex text-lg font-bold">
-        <div className="mr-3 h-[15px] w-[15px] rounded-full bg-blue-500" />
+        <div
+          className={cx(
+            'mr-3 h-[15px] w-[15px] rounded-full',
+            colorDict[index % colorDict.length],
+          )}
+        />
         <Typography className="uppercase" variant="heading-sm">
           {name} ({numTasks.toString()})
         </Typography>
