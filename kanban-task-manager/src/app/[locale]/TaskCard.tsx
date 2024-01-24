@@ -1,3 +1,4 @@
+import cx from 'classix';
 import { useTranslations } from 'next-intl';
 
 import Typography from '@/components/Typography';
@@ -30,7 +31,10 @@ const TaskCard: React.FC<TaskProps> = ({ task }) => {
           handleOpenViewTaskModal();
         }
       }}
-      className="w-[280px] rounded-lg bg-white p-4 py-6 shadow-md hover:cursor-pointer hover:bg-slate-100 hover:shadow-lg"
+      className={cx(
+        'w-[280px] rounded-lg bg-white p-4 py-6 shadow-md hover:cursor-pointer hover:bg-slate-100 hover:shadow-lg',
+        'dark:bg-dark-grey dark:hover:bg-dark-grey/50',
+      )}
     >
       <Typography variant="heading-md">{task.title}</Typography>
       {totalSubtasks > 0 && (
