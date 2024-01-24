@@ -1,92 +1,119 @@
+import { Listbox, Transition } from '@headlessui/react';
 import cx from 'classix';
-import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
+import type { UseControllerProps } from 'react-hook-form';
 
-import IconChevronDown from '../../public/assets/icon-chevron-down.svg';
-import IconChevronUp from '../../public/assets/icon-chevron-up.svg';
-import { typographyStyles } from './Typography';
+import { IconChevronDown, IconChevronUp } from './Icons';
+import Typography from './Typography';
 
-interface DropdownProps {
+const defaultRenderSelectedOption = (option: { name: string }) => (
+  <Typography variant="body-lg">{option.name}</Typography>
+);
+
+interface DropdownProps extends UseControllerProps {
   label: string;
-  options: string[];
-  onChange: (value: string) => void;
-  defaultValue?: string;
-  containerClassName?: string;
+  options: Array<any>;
+  selectedOption: any;
+  setSelectedOption: any;
+  renderSelectedOption?: (option: any) => React.ReactNode;
+  Option?: (props: {
+    option: any;
+    active: boolean;
+    selected: boolean;
+  }) => React.ReactNode;
 }
 
+const DefaultOption: DropdownProps['Option'] = ({
+  option,
+  active,
+  selected,
+}) => (
+  <Typography
+    variant="body-lg"
+    className={cx(
+      'block truncate',
+      active ? 'text-white' : 'text-medium-grey',
+      selected && 'font-bold',
+    )}
+  >
+    {option.name}
+  </Typography>
+);
+
+/**
+ * TODO:
+ * - [x] Use headless UI for the dropdown
+ * - [ ] Convert to controlled component
+ */
 const Dropdown: React.FC<DropdownProps> = ({
   label,
   options,
-  onChange,
-  defaultValue,
-  containerClassName,
+  selectedOption,
+  setSelectedOption,
+  renderSelectedOption = defaultRenderSelectedOption,
+  Option = DefaultOption,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(
-    defaultValue || null,
-  );
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOptionClick = (option: string) => {
-    onChange(option);
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
-
   return (
-    <div className={cx(containerClassName)}>
-      <label
-        htmlFor="text-input"
-        className={cx('text-xs text-medium-grey font-bold', 'dark:text-white')}
-      >
-        {label}
-      </label>
-      <div className="relative mt-2" role="button" tabIndex={0}>
-        <button
-          type="button"
-          className={cx(
-            'w-full px-4 py-2 flex justify-between items-center',
-            typographyStyles['body-lg'],
-            isOpen && 'focus:border-main-purple',
-            'rounded border border-black/25 px-4 py-2',
-            'dark:bg-dark-grey dark:border-lines-dark dark:text-white',
-          )}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {selectedOption || 'Select an option'}
-          <Image
-            src={isOpen ? IconChevronUp : IconChevronDown}
-            alt="Chevron Down"
-            className=""
-            width={10}
-            height={10}
-          />
-        </button>
-        {isOpen && (
-          <ul
-            className={cx(
-              'absolute z-10 mt-2 w-full rounded-md bg-white py-1 shadow-lg',
-              'flex flex-col',
-              'dark:bg-very-dark-grey-black',
-            )}
-          >
-            {options.map((option, index) => (
-              <button
-                key={option}
-                tabIndex={index}
-                type="button"
-                className={cx(
-                  typographyStyles['body-lg'],
-                  'cursor-pointer px-4 py-2 text-left text-medium-grey hover:bg-gray-100 dark:hover:bg-gray-800',
-                )}
-                onClick={() => handleOptionClick(option)}
+    <Listbox value={selectedOption} onChange={setSelectedOption}>
+      {({ open }) => (
+        <div>
+          {/* TODO: Wrap the below with label tag */}
+          <Typography variant="body-md" className="text-medium-grey">
+            {label}
+          </Typography>
+
+          <div className="relative">
+            <Listbox.Button
+              className={cx(
+                'mt-2',
+                'w-full px-4 py-2 flex justify-between items-center',
+                'rounded border',
+                'dark:bg-dark-grey dark:text-white',
+                open
+                  ? 'border-main-purple'
+                  : 'border-lines-light dark:border-lines-dark ',
+              )}
+            >
+              {renderSelectedOption(selectedOption)}
+              {open ? <IconChevronUp /> : <IconChevronDown />}
+            </Listbox.Button>
+            {open && (
+              <Transition
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
               >
-                {option}
-              </button>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+                <Listbox.Options
+                  className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                  static
+                >
+                  {options.map((option) => (
+                    <Listbox.Option
+                      key={`option-${option.id}`}
+                      className={({ active }) =>
+                        `relative cursor-pointer select-none py-1 px-4 ${
+                          active ? 'bg-main-purple-light' : ''
+                        }`
+                      }
+                      value={option}
+                    >
+                      {({ active }) => (
+                        <Option
+                          option={option}
+                          active={active}
+                          selected={option.id === selectedOption.id}
+                        />
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            )}
+          </div>
+        </div>
+      )}
+    </Listbox>
   );
 };
 
