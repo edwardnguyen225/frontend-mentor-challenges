@@ -42,6 +42,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
             inputClassName,
             'w-full resize-none',
             typographyStyles['body-lg'],
+            // TODO: Change border color to `border-lines-light`
             'rounded border border-black/25 px-4 py-2',
             'placeholder:text-black/25)',
             'focus:border-main-purple active:border-main-purple',

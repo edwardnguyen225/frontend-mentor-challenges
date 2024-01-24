@@ -2,7 +2,7 @@ import cx from 'classix';
 import React from 'react';
 import { useController, type UseControllerProps } from 'react-hook-form';
 
-import { typographyStyles } from './Typography';
+import Typography, { typographyStyles } from './Typography';
 
 interface TextFieldProps extends UseControllerProps {
   label?: string;
@@ -39,6 +39,7 @@ const TextField: React.FC<TextFieldProps> = ({
           className={cx(
             'w-full',
             typographyStyles['body-lg'],
+            // TODO: Change border color to `border-lines-light`
             'rounded border border-black/25 px-4 py-2',
             'placeholder:text-black/25)',
             'focus:border-main-purple active:border-main-purple',
@@ -48,7 +49,12 @@ const TextField: React.FC<TextFieldProps> = ({
           )}
         />
         {error && (
-          <p className="absolute right-4 mt-2 text-red">{error.message}</p>
+          <Typography
+            variant="body-lg"
+            className="absolute right-4 mt-2 text-red"
+          >
+            {error.message}
+          </Typography>
         )}
       </div>
     </div>

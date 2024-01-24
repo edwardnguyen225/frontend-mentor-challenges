@@ -3,6 +3,7 @@ import React from 'react';
 import { useModalStore } from '@/stores/newKanbanStore';
 
 import AddBoardModal from './AddBoardModal';
+import AddTaskModal from './AddTaskModal';
 import DeleteBoardModal from './DeleteBoardModal';
 import EditBoardModal from './EditBoardModal';
 
@@ -31,6 +32,12 @@ const ModalController = () => {
       />
       <EditBoardModal
         isOpen={isOpen && type === 'edit-board'}
+        closeModal={closeModal}
+        {...props}
+      />
+
+      <AddTaskModal
+        isOpen={isOpen && type === 'add-task'}
         closeModal={closeModal}
         {...props}
       />

@@ -20,7 +20,8 @@
     "no_tasks": "No tasks yet",
     "errors": {
       "required_error": "Can't be empty",
-      "has_unnamed_column": "Has Unnamed Column"
+      "has_unnamed_column": "Has Unnamed Column",
+      "has_empty_subtask": "Has empty subtask"
     },
     "board_modal": {
       "add_new_board": "Add New Board",
@@ -42,6 +43,19 @@
       "title": "Delete this board?",
       "description": "Are you sure you want to delete the {name} board? This action will remove all columns and tasks and cannot be reversed.",
       "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "add_task_modal": {
+      "modal_title": "Add New Task",
+      "title": "Title",
+      "title_placeholder": "e.g. Take coffee break",
+      "description": "Description",
+      "description_placeholder": "e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little.",
+      "subtasks": "Subtasks",
+      "subtask_placeholder": "e.g. Drink coffee",
+      "add_new_subtask": "+ Add New Subtask",
+      "status": "Status",
+      "submit": "Create Task",
       "cancel": "Cancel"
     }
   }

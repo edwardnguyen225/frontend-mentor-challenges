@@ -12,6 +12,7 @@ import type {
 } from '@/types/kanban';
 
 import { DUMMY_BOARD, DUMMY_COLUMNS, DUMMY_TASKS } from './dummyVariables';
+
 interface KanbanStore {
   boards: {
     [key: string]: Board;
@@ -40,7 +41,10 @@ interface KanbanStore {
   updateCurrentColumns: (columns: { name: string; id?: string }[]) => void;
 
   getTasksByColumnId: (columnId: Column['id']) => Task[];
-  addTask: (columnId: Column['id'], task: Omit<Task, 'id'>) => void;
+  addTask: (
+    task: Omit<Task, 'id' | 'subtasks'>,
+    subtaskTitles: string[],
+  ) => void;
   updateTask: (task: Task) => void;
   removeTask: (taskId: Task['id']) => void;
 
@@ -287,11 +291,18 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     return tasks;
   },
 
-  addTask: (columnId, task) => {
+  addTask: (task, subtaskTitles) => {
     const taskId = uuidv4();
+    const { columnId } = task;
+
     const newTask: Task = {
-      id: taskId,
       ...task,
+      id: taskId,
+      subtasks: subtaskTitles.map((title) => ({
+        id: uuidv4(),
+        title,
+        isCompleted: false,
+      })),
     };
 
     set(

@@ -1,27 +1,26 @@
 import { Listbox, Transition } from '@headlessui/react';
 import cx from 'classix';
 import React, { Fragment } from 'react';
-import type { UseControllerProps } from 'react-hook-form';
 
 import { IconChevronDown, IconChevronUp } from './Icons';
 import Typography from './Typography';
 
-const defaultRenderSelectedOption = (option: { name: string }) => (
-  <Typography variant="body-lg">{option.name}</Typography>
-);
-
-interface DropdownProps extends UseControllerProps {
+interface DropdownProps {
   label: string;
   options: Array<any>;
   selectedOption: any;
   setSelectedOption: any;
-  renderSelectedOption?: (option: any) => React.ReactNode;
+  SelectedOption?: (option: any) => React.ReactNode;
   Option?: (props: {
     option: any;
     active: boolean;
     selected: boolean;
   }) => React.ReactNode;
 }
+
+const DefaultSelectedOption: DropdownProps['SelectedOption'] = ({ option }) => (
+  <Typography variant="body-lg">{option.name}</Typography>
+);
 
 const DefaultOption: DropdownProps['Option'] = ({
   option,
@@ -40,17 +39,12 @@ const DefaultOption: DropdownProps['Option'] = ({
   </Typography>
 );
 
-/**
- * TODO:
- * - [x] Use headless UI for the dropdown
- * - [ ] Convert to controlled component
- */
 const Dropdown: React.FC<DropdownProps> = ({
   label,
   options,
   selectedOption,
   setSelectedOption,
-  renderSelectedOption = defaultRenderSelectedOption,
+  SelectedOption = DefaultSelectedOption,
   Option = DefaultOption,
 }) => {
   return (
@@ -74,7 +68,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                   : 'border-lines-light dark:border-lines-dark ',
               )}
             >
-              {renderSelectedOption(selectedOption)}
+              <SelectedOption option={selectedOption} />
               {open ? <IconChevronUp /> : <IconChevronDown />}
             </Listbox.Button>
             {open && (

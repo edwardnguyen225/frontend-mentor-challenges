@@ -6,13 +6,14 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import LogoDark from '@/public/assets/logo-dark.svg';
-import { useKanbanStore } from '@/stores/newKanbanStore';
+import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
 
 import BoardMenu from './BoardMenu';
 import Button from './Button';
 import Typography from './Typography';
 
 const Header: React.FC = () => {
+  const { openAddTaskModal } = useModalStore();
   const { isSidebarOpen, getCurrentBoard } = useKanbanStore();
   const t = useTranslations('Header');
 
@@ -42,9 +43,7 @@ const Header: React.FC = () => {
             variant="primary"
             size="L"
             disabled={columnIds?.length === 0}
-            onClick={() => {
-              console.log('clicked');
-            }}
+            onClick={openAddTaskModal}
           >
             {t('add_new_task')}
           </Button>

@@ -43,6 +43,6 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  status: Column['name'];
+  columnId: string;
   subtasks: Subtask[];
 }
