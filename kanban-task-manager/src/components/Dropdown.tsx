@@ -19,7 +19,9 @@ interface DropdownProps {
 }
 
 const DefaultSelectedOption: DropdownProps['SelectedOption'] = ({ option }) => (
-  <Typography variant="body-lg">{option.name}</Typography>
+  <Typography variant="body-lg" className="dark:text-white">
+    {option.name}
+  </Typography>
 );
 
 const DefaultOption: DropdownProps['Option'] = ({
@@ -62,7 +64,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 'mt-2',
                 'w-full px-4 py-2 flex justify-between items-center',
                 'rounded border',
-                'dark:bg-dark-grey dark:text-white',
+                'dark:bg-dark-grey',
                 open
                   ? 'border-main-purple'
                   : 'border-lines-light dark:border-lines-dark ',
@@ -79,7 +81,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 leaveTo="opacity-0"
               >
                 <Listbox.Options
-                  className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                  className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:bg-dark-grey"
                   static
                 >
                   {options.map((option) => (

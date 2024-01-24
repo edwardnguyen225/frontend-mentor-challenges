@@ -6,7 +6,7 @@ import IconCheck from '../../public/assets/icon-check.svg';
 
 interface SubtaskCheckboxProps {
   id: string;
-  children: string | string[];
+  children: React.ReactNode | React.ReactNode[];
   completed: boolean;
   onChange: () => void;
 }
@@ -25,7 +25,7 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
     <div
       role="button"
       tabIndex={0}
-      className="flex items-center rounded bg-light-grey hover:bg-main-purple/25 dark:bg-very-dark-grey-black"
+      className="group flex cursor-pointer items-center rounded bg-light-grey hover:bg-main-purple/25 dark:bg-very-dark-grey-black"
       onClick={handleCheckboxChange}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
@@ -48,7 +48,7 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
             type="checkbox"
             checked={completed}
             onChange={handleCheckboxChange}
-            className="peer col-start-1 row-start-1 h-4 w-4 appearance-none rounded border border-slate-300 ring-transparent checked:border-violet-600 checked:bg-violet-600 dark:border-slate-600 dark:checked:border-violet-600 forced-colors:appearance-auto"
+            className="peer col-start-1 row-start-1 h-4 w-4 appearance-none rounded border border-slate-300 ring-transparent checked:border-violet-600 checked:bg-violet-600 group-hover:bg-white dark:border-slate-600 dark:checked:border-violet-600 dark:group-hover:bg-very-dark-grey-black forced-colors:appearance-auto"
           />
           <Image
             src={IconCheck}

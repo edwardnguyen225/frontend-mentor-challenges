@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 /**
  * @deprecated
  */
@@ -38,6 +40,17 @@ export interface Subtask {
   title: string;
   isCompleted: boolean;
 }
+
+export const SubtaskSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  isCompleted: z.boolean(),
+});
+
+export const TaskStatusSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
 
 export interface Task {
   id: string;

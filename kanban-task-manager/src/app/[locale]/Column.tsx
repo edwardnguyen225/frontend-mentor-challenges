@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 
 import Typography from '@/components/Typography';
 import { useKanbanStore } from '@/stores/newKanbanStore';
+import { getTasksByColumnId } from '@/stores/selector';
 
 import TaskCard from './TaskCard';
 
@@ -22,8 +23,7 @@ const Column: React.FC<ColumnProps> = ({
   className,
 }) => {
   const t = useTranslations('Board');
-  const { getTasksByColumnId } = useKanbanStore();
-  const tasks = getTasksByColumnId(columnId);
+  const tasks = useKanbanStore((state) => getTasksByColumnId(state, columnId));
   const numTasks = tasks.length;
 
   return (

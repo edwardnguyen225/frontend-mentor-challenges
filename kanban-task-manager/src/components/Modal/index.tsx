@@ -6,6 +6,7 @@ import AddBoardModal from './AddBoardModal';
 import AddTaskModal from './AddTaskModal';
 import DeleteBoardModal from './DeleteBoardModal';
 import EditBoardModal from './EditBoardModal';
+import ViewTaskModal from './ViewTaskModal';
 
 const ModalController = () => {
   const {
@@ -38,6 +39,11 @@ const ModalController = () => {
 
       <AddTaskModal
         isOpen={isOpen && type === 'add-task'}
+        closeModal={closeModal}
+        {...props}
+      />
+      <ViewTaskModal
+        isOpen={isOpen && type === 'view-task'}
         closeModal={closeModal}
         {...props}
       />

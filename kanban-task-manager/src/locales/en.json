@@ -57,6 +57,14 @@
       "status": "Status",
       "submit": "Create Task",
       "cancel": "Cancel"
+    },
+    "view_task_modal": {
+      "subtasks": "Subtasks ({count} of {total})",
+      "current_status": "Current Status",
+      "menu": {
+        "edit_task": "Edit Task",
+        "delete_task": "Delete Task"
+      }
     }
   }
 }

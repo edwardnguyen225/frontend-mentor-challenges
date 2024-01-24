@@ -13,7 +13,7 @@ import type {
 
 import { DUMMY_BOARD, DUMMY_COLUMNS, DUMMY_TASKS } from './dummyVariables';
 
-interface KanbanStore {
+export interface KanbanStore {
   boards: {
     [key: string]: Board;
   };
@@ -40,7 +40,7 @@ interface KanbanStore {
   getCurrentColumnsWithTaskIds: () => Column[];
   updateCurrentColumns: (columns: { name: string; id?: string }[]) => void;
 
-  getTasksByColumnId: (columnId: Column['id']) => Task[];
+  getTaskByTaskId: (taskId: Task['id']) => Task | undefined;
   addTask: (
     task: Omit<Task, 'id' | 'subtasks'>,
     subtaskTitles: string[],
@@ -274,21 +274,8 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     );
   },
 
-  getTasksByColumnId: (columnId) => {
-    const column = get().columns[columnId];
-    if (column === undefined) {
-      return [];
-    }
-
-    const { taskIds } = column;
-    const tasks: Task[] = [];
-    taskIds.forEach((taskId) => {
-      const task = get().tasks[taskId];
-      if (task) {
-        tasks.push(task);
-      }
-    });
-    return tasks;
+  getTaskByTaskId: (taskId) => {
+    return get().tasks[taskId];
   },
 
   addTask: (task, subtaskTitles) => {
@@ -332,7 +319,21 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         if (currentTask === undefined) {
           return;
         }
+        const previousColumnId = get().tasks[task.id]?.columnId;
 
+        if (previousColumnId && previousColumnId !== task.columnId) {
+          const previousColumn = get().columns[previousColumnId] as Column;
+          const newColumn = get().columns[task.columnId] as Column;
+
+          state.columns[previousColumn.id] = {
+            ...previousColumn,
+            taskIds: previousColumn.taskIds.filter((id) => id !== task.id),
+          };
+          state.columns[newColumn.id] = {
+            ...newColumn,
+            taskIds: [...newColumn.taskIds, task.id],
+          };
+        }
         state.tasks[task.id] = task;
       }),
     );
