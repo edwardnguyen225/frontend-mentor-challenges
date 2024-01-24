@@ -11,6 +11,7 @@ import type {
   Task,
 } from '@/types/kanban';
 
+import { DUMMY_BOARD, DUMMY_COLUMNS, DUMMY_TASKS } from './dummyVariables';
 interface KanbanStore {
   boards: {
     [key: string]: Board;
@@ -57,16 +58,7 @@ interface KanbanStore {
   // For testing purposes
   resetStore?: () => void;
 }
-const DUMMY_BOARD: Board = {
-  id: uuidv4(),
-  name: 'New Empty Board',
-  columnIds: [],
-};
-const SECOND_DUMMY_BOARD: Board = {
-  id: uuidv4(),
-  name: 'Second Empty Board',
-  columnIds: [],
-};
+
 const INIT_STATE: Pick<
   KanbanStore,
   | 'boards'
@@ -77,13 +69,10 @@ const INIT_STATE: Pick<
   | 'isSidebarOpen'
   | 'modal'
 > = {
-  boards: {
-    [DUMMY_BOARD.id]: DUMMY_BOARD,
-    [SECOND_DUMMY_BOARD.id]: SECOND_DUMMY_BOARD,
-  },
-  currentBoardId: DUMMY_BOARD.id,
-  columns: {},
-  tasks: {},
+  boards: DUMMY_BOARD,
+  currentBoardId: Object.keys(DUMMY_BOARD)[0] as string,
+  columns: DUMMY_COLUMNS,
+  tasks: DUMMY_TASKS,
   isSidebarOpen: true,
   theme: 'light',
 
