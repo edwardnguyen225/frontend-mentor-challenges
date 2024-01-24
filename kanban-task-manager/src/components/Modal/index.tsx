@@ -5,6 +5,7 @@ import { useModalStore } from '@/stores/newKanbanStore';
 import AddBoardModal from './AddBoardModal';
 import AddTaskModal from './AddTaskModal';
 import DeleteBoardModal from './DeleteBoardModal';
+import DeleteTaskModal from './DeleteTaskModal';
 import EditBoardModal from './EditBoardModal';
 import ViewTaskModal from './ViewTaskModal';
 
@@ -44,6 +45,11 @@ const ModalController = () => {
       />
       <ViewTaskModal
         isOpen={isOpen && type === 'view-task'}
+        closeModal={closeModal}
+        {...props}
+      />
+      <DeleteTaskModal
+        isOpen={isOpen && type === 'delete-task'}
         closeModal={closeModal}
         {...props}
       />

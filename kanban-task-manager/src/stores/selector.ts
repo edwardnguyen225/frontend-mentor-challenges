@@ -21,3 +21,10 @@ export const getTasksByColumnId = (
   });
   return tasks;
 };
+
+export const getTaskById = (
+  state: KanbanStore,
+  taskId: Task['id'],
+): Task | undefined => {
+  return state.tasks[taskId];
+};

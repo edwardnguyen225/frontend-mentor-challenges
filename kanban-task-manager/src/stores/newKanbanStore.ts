@@ -40,7 +40,6 @@ export interface KanbanStore {
   getCurrentColumnsWithTaskIds: () => Column[];
   updateCurrentColumns: (columns: { name: string; id?: string }[]) => void;
 
-  getTaskByTaskId: (taskId: Task['id']) => Task | undefined;
   addTask: (
     task: Omit<Task, 'id' | 'subtasks'>,
     subtaskTitles: string[],
@@ -272,10 +271,6 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         }
       }),
     );
-  },
-
-  getTaskByTaskId: (taskId) => {
-    return get().tasks[taskId];
   },
 
   addTask: (task, subtaskTitles) => {

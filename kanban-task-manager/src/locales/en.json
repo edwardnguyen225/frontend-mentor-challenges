@@ -65,6 +65,12 @@
         "edit_task": "Edit Task",
         "delete_task": "Delete Task"
       }
+    },
+    "delete_task_modal": {
+      "title": "Delete this task?",
+      "description": "Are you sure you want to delete the ‘{title}’ task and its subtasks? This action cannot be reversed.",
+      "submit": "Delete",
+      "cancel": "Cancel"
     }
   }
 }

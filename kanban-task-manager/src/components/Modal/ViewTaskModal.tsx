@@ -12,6 +12,7 @@ import { z } from 'zod';
 
 import IconVerticalEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
+import { getTaskById } from '@/stores/selector';
 import type { Column, Subtask, Task } from '@/types/kanban';
 import { SubtaskSchema, TaskStatusSchema } from '@/types/kanban';
 
@@ -55,6 +56,7 @@ const TaskMenu: React.FC<{ taskId: Task['id'] }> = ({ taskId }) => {
             className={cx(
               'absolute right-0 mt-2 mr-4 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
               'dark:bg-dark-grey dark:divide-lines-dark',
+              'z-10',
             )}
           >
             <Menu.Item>
@@ -138,8 +140,8 @@ const ViewTaskModal: React.FC<ViewTaskModalProps> = ({
 }) => {
   const t = useTranslations('Board');
 
-  const { getTaskByTaskId, getCurrentColumns, updateTask } = useKanbanStore();
-  const task = getTaskByTaskId(taskId);
+  const { getCurrentColumns, updateTask } = useKanbanStore();
+  const task = useKanbanStore((state) => getTaskById(state, taskId));
   const columns = getCurrentColumns();
 
   const { control, getValues, setValue, reset } = useForm<ViewTaskForm>({
