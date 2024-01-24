@@ -48,7 +48,10 @@ const SubtaskCheckbox: React.FC<SubtaskCheckboxProps> = ({
             type="checkbox"
             checked={completed}
             onChange={handleCheckboxChange}
-            className="peer col-start-1 row-start-1 h-4 w-4 appearance-none rounded border border-slate-300 ring-transparent checked:border-violet-600 checked:bg-violet-600 group-hover:bg-white dark:border-slate-600 dark:checked:border-violet-600 dark:group-hover:bg-very-dark-grey-black forced-colors:appearance-auto"
+            className={cx(
+              'peer col-start-1 row-start-1 h-4 w-4 appearance-none rounded border border-slate-300 ring-transparent checked:bg-main-purple group-hover:bg-white forced-colors:appearance-auto checked:group-hover:bg-main-purple',
+              'dark:border-slate-600 dark:group-hover:bg-very-dark-grey-black dark:checked:group-hover:bg-main-purple',
+            )}
           />
           <Image
             src={IconCheck}
