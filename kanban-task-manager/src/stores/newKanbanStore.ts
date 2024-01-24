@@ -8,6 +8,7 @@ import type {
   Column,
   ModalState,
   ModalType,
+  Subtask,
   Task,
 } from '@/types/kanban';
 
@@ -36,7 +37,7 @@ export interface KanbanStore {
   removeBoard: (boardId: string) => void;
   updateCurrentBoardName: (newName: string) => void;
 
-  getCurrentColumns: () => Omit<Column, 'taskIds'>[];
+  // TODO: Remove
   getCurrentColumnsWithTaskIds: () => Column[];
   updateCurrentColumns: (columns: { name: string; id?: string }[]) => void;
 
@@ -329,7 +330,16 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
             taskIds: [...newColumn.taskIds, task.id],
           };
         }
-        state.tasks[task.id] = task;
+
+        const previousSubtasksDictionary: Record<Subtask['id'], Subtask> = {};
+        const previousSubtasks = get().tasks[task.id]?.subtasks ?? [];
+        previousSubtasks.forEach((subtask) => {
+          previousSubtasksDictionary[subtask.id] = subtask;
+        });
+
+        state.tasks[task.id] = {
+          ...task,
+        };
       }),
     );
   },

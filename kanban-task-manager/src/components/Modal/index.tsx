@@ -7,6 +7,7 @@ import AddTaskModal from './AddTaskModal';
 import DeleteBoardModal from './DeleteBoardModal';
 import DeleteTaskModal from './DeleteTaskModal';
 import EditBoardModal from './EditBoardModal';
+import EditTaskModal from './EditTaskModal';
 import ViewTaskModal from './ViewTaskModal';
 
 const ModalController = () => {
@@ -50,6 +51,11 @@ const ModalController = () => {
       />
       <DeleteTaskModal
         isOpen={isOpen && type === 'delete-task'}
+        closeModal={closeModal}
+        {...props}
+      />
+      <EditTaskModal
+        isOpen={isOpen && type === 'edit-task'}
         closeModal={closeModal}
         {...props}
       />
