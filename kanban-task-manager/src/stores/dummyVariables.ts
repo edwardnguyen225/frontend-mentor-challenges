@@ -28,9 +28,11 @@ const generateDummyTask = (props: Partial<Task>): Task => ({
 
 const DUMMY_TASK_01: Task = generateDummyTask({
   title: 'First Task',
+  columnId: DUMMY_COLUMN_01.id,
 });
 const DUMMY_TASK_02: Task = generateDummyTask({
   title: 'Second Task',
+  columnId: DUMMY_COLUMN_01.id,
 });
 const DUMMY_TASK_03: Task = generateDummyTask({
   title: 'Third Task',
@@ -57,17 +59,32 @@ const DUMMY_BOARD: { [key: string]: Board } = {
   [DUMMY_BOARD_02.id]: DUMMY_BOARD_02,
 };
 
-const DUMMY_COLUMNS: { [key: string]: Column } = {
-  [DUMMY_COLUMN_01.id]: DUMMY_COLUMN_01,
-  [DUMMY_COLUMN_02.id]: DUMMY_COLUMN_02,
-  [DUMMY_COLUMN_03.id]: DUMMY_COLUMN_03,
-};
-
 const DUMMY_TASKS: { [key: string]: Task } = {
   [DUMMY_TASK_01.id]: DUMMY_TASK_01,
   [DUMMY_TASK_02.id]: DUMMY_TASK_02,
   [DUMMY_TASK_03.id]: DUMMY_TASK_03,
   [DUMMY_TASK_04.id]: DUMMY_TASK_04,
+};
+
+const getTaskIdsForColumnId = (columnId: string) => {
+  return Object.values(DUMMY_TASKS)
+    .filter((task) => task.columnId === columnId)
+    .map((task) => task.id);
+};
+
+const DUMMY_COLUMNS: { [key: string]: Column } = {
+  [DUMMY_COLUMN_01.id]: {
+    ...DUMMY_COLUMN_01,
+    taskIds: getTaskIdsForColumnId(DUMMY_COLUMN_01.id),
+  },
+  [DUMMY_COLUMN_02.id]: {
+    ...DUMMY_COLUMN_02,
+    taskIds: getTaskIdsForColumnId(DUMMY_COLUMN_02.id),
+  },
+  [DUMMY_COLUMN_03.id]: {
+    ...DUMMY_COLUMN_03,
+    taskIds: getTaskIdsForColumnId(DUMMY_COLUMN_03.id),
+  },
 };
 
 export { DUMMY_BOARD, DUMMY_COLUMNS, DUMMY_TASKS };
