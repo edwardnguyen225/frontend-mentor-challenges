@@ -58,7 +58,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             >
               <Dialog.Panel
                 className={cx(
-                  'w-full max-w-md overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all',
+                  'w-full max-w-md rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all',
                   'dark:bg-dark-grey dark:text-white',
                 )}
               >
