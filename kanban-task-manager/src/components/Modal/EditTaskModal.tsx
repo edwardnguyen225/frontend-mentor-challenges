@@ -87,8 +87,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     resolver: zodResolver(formSchema),
   });
 
-  console.log('DEBUG errors', errors);
-
   useEffect(() => {
     return () => {
       reset(initFormData);
