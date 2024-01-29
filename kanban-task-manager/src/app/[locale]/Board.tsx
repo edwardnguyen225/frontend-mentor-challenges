@@ -20,7 +20,7 @@ const Board: React.FC = () => {
   }
 
   return (
-    <div className="flex gap-6 overflow-x-auto p-6">
+    <div className="mx-6 mt-6 flex gap-6 overflow-x-auto">
       {columns.map((col, index) => (
         <Column
           className={cx('grow-0 shrink-0 w-[280px]')}
