@@ -17,7 +17,6 @@ import type { Column, Subtask, Task } from '@/types/kanban';
 import { SubtaskSchema, TaskStatusSchema } from '@/types/kanban';
 
 import Dropdown from '../Dropdown';
-import { IconDelete, IconEdit } from '../Icons';
 import SubtaskCheckbox from '../SubtaskCheckbox';
 import Typography from '../Typography';
 import ModalWrapper from './ModalWrapper';
@@ -54,7 +53,7 @@ const TaskMenu: React.FC<{ taskId: Task['id'] }> = ({ taskId }) => {
         >
           <Menu.Items
             className={cx(
-              'absolute right-0 mt-2 mr-4 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
+              'absolute -right-24 mt-2 mr-4 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
               'dark:bg-dark-grey dark:divide-lines-dark',
               'z-10',
             )}
@@ -63,23 +62,18 @@ const TaskMenu: React.FC<{ taskId: Task['id'] }> = ({ taskId }) => {
               {({ active }) => (
                 <button
                   type="button"
-                  className={`${
-                    active
-                      ? 'bg-main-purple text-white'
-                      : 'text-gray-900 dark:text-white'
-                  } group flex w-full items-center rounded-md p-2 text-sm`}
+                  className={cx(
+                    active && 'bg-main-purple',
+                    'group flex w-full items-center rounded-md p-2 text-sm',
+                  )}
                   onClick={() => openEditTaskModal(taskId)}
                 >
-                  <IconEdit
-                    className={cx(
-                      'mr-2 h-5 w-5',
-                      active
-                        ? 'fill-main-purple stroke-white'
-                        : 'fill-white stroke-main-purple dark:fill-dark-grey dark:stroke-lines-light',
-                    )}
-                    aria-hidden="true"
-                  />
-                  {t('edit_task')}
+                  <Typography
+                    variant="body-lg"
+                    className="text-medium-grey group-hover:text-white"
+                  >
+                    {t('edit_task')}
+                  </Typography>
                 </button>
               )}
             </Menu.Item>
@@ -87,23 +81,18 @@ const TaskMenu: React.FC<{ taskId: Task['id'] }> = ({ taskId }) => {
               {({ active }) => (
                 <button
                   type="button"
-                  className={`${
-                    active
-                      ? 'bg-red text-white'
-                      : 'text-gray-900 dark:text-white'
-                  } group flex w-full items-center rounded-md p-2 text-sm`}
+                  className={cx(
+                    active && 'bg-red',
+                    'group flex w-full items-center rounded-md p-2 text-sm',
+                  )}
                   onClick={() => openDeleteTaskModal(taskId)}
                 >
-                  <IconDelete
-                    className={cx(
-                      'mr-2 h-5 w-5',
-                      active
-                        ? 'fill-red stroke-white'
-                        : 'fill-white stroke-red dark:fill-dark-grey',
-                    )}
-                    aria-hidden="true"
-                  />
-                  {t('delete_task')}
+                  <Typography
+                    variant="body-lg"
+                    className="text-red group-hover:text-white"
+                  >
+                    {t('delete_task')}
+                  </Typography>
                 </button>
               )}
             </Menu.Item>

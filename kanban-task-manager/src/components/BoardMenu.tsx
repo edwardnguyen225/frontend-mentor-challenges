@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 import IconVerticalEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 import { useModalStore } from '@/stores/newKanbanStore';
 
-import { IconDelete, IconEdit } from './Icons';
+import Typography from './Typography';
 
 const BoardMenu: React.FC = () => {
   const t = useTranslations('Board');
@@ -51,23 +51,18 @@ const BoardMenu: React.FC = () => {
               {({ active }) => (
                 <button
                   type="button"
-                  className={`${
-                    active
-                      ? 'bg-main-purple text-white'
-                      : 'text-gray-900 dark:text-white'
-                  } group flex w-full items-center rounded-md p-2 text-sm`}
+                  className={cx(
+                    active && 'bg-main-purple',
+                    'group flex w-full items-center rounded-md p-2 text-sm',
+                  )}
                   onClick={openEditBoardModal}
                 >
-                  <IconEdit
-                    className={cx(
-                      'mr-2 h-5 w-5',
-                      active
-                        ? 'fill-main-purple stroke-white'
-                        : 'fill-white stroke-main-purple dark:fill-dark-grey dark:stroke-lines-light',
-                    )}
-                    aria-hidden="true"
-                  />
-                  {t('edit_board')}
+                  <Typography
+                    variant="body-lg"
+                    className="text-medium-grey group-hover:text-white"
+                  >
+                    {t('edit_board')}
+                  </Typography>
                 </button>
               )}
             </Menu.Item>
@@ -75,23 +70,18 @@ const BoardMenu: React.FC = () => {
               {({ active }) => (
                 <button
                   type="button"
-                  className={`${
-                    active
-                      ? 'bg-red text-white'
-                      : 'text-gray-900 dark:text-white'
-                  } group flex w-full items-center rounded-md p-2 text-sm`}
+                  className={cx(
+                    active && 'bg-red',
+                    'group flex w-full items-center rounded-md p-2 text-sm',
+                  )}
                   onClick={openDeleteBoardModal}
                 >
-                  <IconDelete
-                    className={cx(
-                      'mr-2 h-5 w-5',
-                      active
-                        ? 'fill-red stroke-white'
-                        : 'fill-white stroke-red dark:fill-dark-grey',
-                    )}
-                    aria-hidden="true"
-                  />
-                  {t('delete_board')}
+                  <Typography
+                    variant="body-lg"
+                    className="text-red group-hover:text-white"
+                  >
+                    {t('delete_board')}
+                  </Typography>
                 </button>
               )}
             </Menu.Item>
