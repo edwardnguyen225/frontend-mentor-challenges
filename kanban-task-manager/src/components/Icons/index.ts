@@ -5,7 +5,9 @@ import IconCross from './IconCross';
 import IconDarkTheme from './IconDarkTheme';
 import IconDelete from './IconDelete';
 import IconEdit from './IconEdit';
+import IconHideSidebar from './IconHideSidebar';
 import IconLightTheme from './IconLightTheme';
+import IconShowSidebar from './IconShowSidebar';
 
 export {
   IconBoard,
@@ -15,5 +17,7 @@ export {
   IconDarkTheme,
   IconDelete,
   IconEdit,
+  IconHideSidebar,
   IconLightTheme,
+  IconShowSidebar,
 };
