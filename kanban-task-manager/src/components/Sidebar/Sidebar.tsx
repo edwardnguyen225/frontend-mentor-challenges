@@ -13,12 +13,43 @@ import Typography from '../Typography';
 import BoardList from './BoardList';
 import ThemeController from './ThemeController';
 
+interface HideSidebarButtonProps {
+  className?: string;
+}
+
+const HideSidebarButton: React.FC<HideSidebarButtonProps> = ({ className }) => {
+  const { hideSidebar } = useSidebarStore();
+  const t = useTranslations('Board');
+
+  return (
+    <button
+      type="button"
+      aria-label="hide sidebar"
+      className={cx(
+        'pl-8 h-12 w-full rounded-r-full',
+        'group flex items-center justify-start gap-4',
+        'hover:bg-main-purple/10 dark:hover:bg-white',
+        className,
+      )}
+      onClick={hideSidebar}
+    >
+      <IconHideSidebar className="fill-medium-grey group-hover:fill-main-purple" />
+      <Typography
+        variant="heading-md"
+        className="text-medium-grey group-hover:text-main-purple"
+      >
+        {t('hide_sidebar')}
+      </Typography>
+    </button>
+  );
+};
+
 interface SidebarProps {
   className?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
-  const { isSidebarShown, hideSidebar } = useSidebarStore();
+  const { isSidebarShown } = useSidebarStore();
   const { boards, theme } = useKanbanStore();
   const t = useTranslations('Board');
 
@@ -48,23 +79,11 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
           </Typography>
           <BoardList />
         </div>
-        <div className="flex flex-col gap-4 px-6">
-          <ThemeController />
-          {/* TODO: Add hide sidebar button */}
-          <button
-            type="button"
-            aria-label="hide sidebar"
-            className="group flex items-center justify-start gap-4 rounded-lg px-2 py-1 hover:bg-[#F5F7FD] dark:bg-[#20212C] dark:hover:bg-[#2D2E3A]"
-            onClick={hideSidebar}
-          >
-            <IconHideSidebar className="fill-medium-grey group-hover:fill-black dark:group-hover:fill-white" />
-            <Typography
-              variant="heading-md"
-              className="text-medium-grey group-hover:text-black dark:group-hover:text-white"
-            >
-              {t('hide_sidebar')}
-            </Typography>
-          </button>
+        <div className="flex flex-col gap-2">
+          <ThemeController className="mx-6" />
+          <div className="w-full pr-6">
+            <HideSidebarButton />
+          </div>
         </div>
       </div>
     </aside>

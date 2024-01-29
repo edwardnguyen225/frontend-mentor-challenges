@@ -6,7 +6,11 @@ import { useKanbanStore } from '@/stores/newKanbanStore';
 
 import { IconDarkTheme, IconLightTheme } from '../Icons';
 
-const ThemeController = () => {
+interface ThemeControllerProps {
+  className?: string;
+}
+
+const ThemeController: React.FC<ThemeControllerProps> = ({ className }) => {
   const { theme, setTheme } = useKanbanStore();
   const isToggleRight = theme === 'dark';
   const handleToggle = () => {
@@ -14,7 +18,12 @@ const ThemeController = () => {
   };
 
   return (
-    <div className="flex items-center  justify-center gap-4 rounded-lg bg-[#F5F7FD] py-4 dark:bg-[#20212C]">
+    <div
+      className={cx(
+        'flex items-center  justify-center gap-4 rounded-lg bg-[#F5F7FD] py-4 dark:bg-[#20212C]',
+        className,
+      )}
+    >
       <IconLightTheme className="fill-medium-grey" />
       <input
         type="checkbox"
@@ -27,7 +36,7 @@ const ThemeController = () => {
         checked={isToggleRight}
         onChange={handleToggle}
         className={cx(
-          'bg-main-purple',
+          'bg-main-purple hover:bg-main-purple-light',
           'relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75',
         )}
       >

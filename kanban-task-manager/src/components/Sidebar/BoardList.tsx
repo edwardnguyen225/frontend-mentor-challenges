@@ -24,10 +24,10 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
     <button
       type="button"
       className={cx(
-        'flex h-12 items-center px-8 rounded-r-full gap-4',
+        'group flex h-12 items-center px-8 rounded-r-full gap-4',
         isActive
           ? 'bg-main-purple hover:bg-main-purple-light'
-          : 'hover:bg-light-grey',
+          : 'hover:bg-main-purple/10',
       )}
       style={{
         width: 'calc(100% - 24px)',
@@ -39,7 +39,9 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
         variant="heading-md"
         className={cx(
           'text-left',
-          isActive ? 'text-white' : 'text-medium-grey',
+          isActive
+            ? 'text-white'
+            : 'text-medium-grey group-hover:text-main-purple',
         )}
       >
         {name}

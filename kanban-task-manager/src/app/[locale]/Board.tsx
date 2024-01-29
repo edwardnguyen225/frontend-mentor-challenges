@@ -33,13 +33,17 @@ const Board: React.FC = () => {
       <button
         type="button"
         className={cx(
+          'group',
           'mt-[38px] flex h-[80vh] w-[280px] shrink-0 items-center justify-center rounded-md ',
-          'bg-new-column hover:bg-medium-grey',
-          'dark:bg-new-column-dark dark:hover:bg-dark-grey',
+          'bg-new-column hover:bg-new-column-hover',
+          'dark:bg-new-column-dark dark:hover:bg-new-column-dark-hover',
         )}
         onClick={openEditBoardAndAddNewColumn}
       >
-        <Typography variant="heading-xl" className="text-medium-grey">
+        <Typography
+          variant="heading-xl"
+          className="text-medium-grey group-hover:text-main-purple"
+        >
           + {t('new_column')}
         </Typography>
       </button>

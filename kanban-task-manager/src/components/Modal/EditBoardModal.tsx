@@ -169,7 +169,7 @@ const EditBoardModal: React.FC<EditBoardModalProps> = ({
                   aria-label="Remove"
                   className="group ml-4"
                 >
-                  <IconCross className="fill-medium-grey group-hover:fill-slate-800 dark:group-hover:fill-white" />
+                  <IconCross className="fill-medium-grey group-hover:fill-red" />
                 </button>
               </li>
             ))}
