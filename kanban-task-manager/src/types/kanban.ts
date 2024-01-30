@@ -9,6 +9,7 @@ export interface TaskColumn {
 }
 
 export type ModalType =
+  | 'kanban-menu'
   | 'add-board'
   | 'edit-board'
   | 'delete-board'

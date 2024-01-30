@@ -53,7 +53,7 @@ const TaskMenu: React.FC<{ taskId: Task['id'] }> = ({ taskId }) => {
         >
           <Menu.Items
             className={cx(
-              'absolute -right-24 mt-2 mr-4 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
+              'absolute -right-14 md:-right-24 mt-2 mr-4 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
               'dark:bg-dark-grey dark:divide-lines-dark',
               'z-10',
             )}

@@ -17,7 +17,7 @@ import IconAddTaskMobile from './Icons/IconAddTaskMobile';
 import Typography from './Typography';
 
 const Header: React.FC = () => {
-  const { openAddTaskModal } = useModalStore();
+  const { openAddTaskModal, openKanbanMenuModal } = useModalStore();
   const { isSidebarOpen, getCurrentBoard } = useKanbanStore();
   const { screenType } = useScreenWidth();
   const t = useTranslations('Header');
@@ -46,8 +46,11 @@ const Header: React.FC = () => {
           <Typography variant="heading-xl">{name}</Typography>
         )}
         {screenType === 'mobile' && (
-          // TODO: Open kanban menu modal
-          <button type="button" className="flex items-center">
+          <button
+            type="button"
+            className="flex items-center"
+            onClick={openKanbanMenuModal}
+          >
             <Image
               src={LogoMobile}
               alt="Logo"

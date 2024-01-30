@@ -8,6 +8,7 @@ import ModalController from '@/components/Modal';
 import { ShowSidebarButton } from '@/components/Sidebar';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { useScreenWidth } from '@/hooks/screen';
+import { useModalStore } from '@/stores/newKanbanStore';
 import useSidebarStore from '@/stores/sidebarStore';
 
 import Board from './Board';
@@ -16,12 +17,19 @@ export default function Page() {
   const { isSidebarShown, hideSidebar, showSidebar } = useSidebarStore();
   const { screenType } = useScreenWidth();
 
+  const { modal, closeModal } = useModalStore();
+
   useEffect(() => {
     if (screenType === 'mobile') {
       hideSidebar();
     } else if (screenType === 'tablet') {
       showSidebar();
     }
+
+    if (modal.type === 'kanban-menu') {
+      closeModal();
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenType]);
 

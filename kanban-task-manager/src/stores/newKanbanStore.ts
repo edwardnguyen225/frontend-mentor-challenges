@@ -435,6 +435,10 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
 export const useModalStore = () => {
   const { modal, openModal, closeModal } = useKanbanStore();
 
+  const openKanbanMenuModal = () => {
+    openModal('kanban-menu');
+  };
+
   const openAddBoardModal = () => {
     openModal('add-board');
   };
@@ -469,6 +473,7 @@ export const useModalStore = () => {
 
   return {
     modal,
+    openKanbanMenuModal,
     openAddBoardModal,
     openEditBoardModal,
     openDeleteBoardModal,

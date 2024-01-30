@@ -8,6 +8,7 @@ import DeleteBoardModal from './DeleteBoardModal';
 import DeleteTaskModal from './DeleteTaskModal';
 import EditBoardModal from './EditBoardModal';
 import EditTaskModal from './EditTaskModal';
+import KanbanMenuModal from './KanbanMenuModal';
 import ViewTaskModal from './ViewTaskModal';
 
 const ModalController = () => {
@@ -23,6 +24,11 @@ const ModalController = () => {
 
   return (
     <>
+      <KanbanMenuModal
+        isOpen={isOpen && type === 'kanban-menu'}
+        closeModal={closeModal}
+      />
+
       <AddBoardModal
         isOpen={isOpen && type === 'add-board'}
         closeModal={closeModal}

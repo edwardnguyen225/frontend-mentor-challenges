@@ -6,12 +6,18 @@ export interface ModalWrapperProps {
   isOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
+  rootClassName?: string;
+  className?: string;
+  shouldUseDefaultPadding?: boolean;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   closeModal,
   children,
+  rootClassName,
+  className,
+  shouldUseDefaultPadding = true,
 }) => {
   const removePaddingRightOfHtml = useCallback(() => {
     setTimeout(() => {
@@ -46,7 +52,13 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center text-center">
+          <div
+            className={cx(
+              'flex min-h-full items-center justify-center text-center',
+              'mx-4 md:mx-0',
+              rootClassName,
+            )}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -58,8 +70,10 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             >
               <Dialog.Panel
                 className={cx(
-                  'w-full max-w-md rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all',
+                  shouldUseDefaultPadding && 'p-8',
+                  'w-full max-w-md rounded-2xl bg-white text-left align-middle shadow-xl transition-all',
                   'dark:bg-dark-grey dark:text-white',
+                  className,
                 )}
               >
                 {children}
