@@ -24,7 +24,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
     <button
       type="button"
       className={cx(
-        'group flex h-12 items-center px-8 rounded-r-full gap-4',
+        'group flex h-12 items-center pl-8 pr-4 rounded-r-full gap-4',
         isActive
           ? 'bg-main-purple hover:bg-main-purple-light'
           : 'hover:bg-main-purple/10',
@@ -57,7 +57,7 @@ const ButtonCreateBoard: React.FC = () => {
   return (
     <button
       type="button"
-      className="flex h-12 items-center gap-4 rounded-r-full px-8 hover:bg-main-purple/20"
+      className="flex h-12 items-center gap-4 rounded-r-full pl-8 pr-4 hover:bg-main-purple/20"
       style={{
         width: 'calc(100% - 24px)',
       }}

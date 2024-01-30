@@ -1,3 +1,21 @@
+const headerHeights = {
+  mobile: '64px',
+  tablet: '80px',
+  desktop: '96px',
+};
+
+const footerHeights = {
+  mobile: '50px',
+  tablet: '50px',
+  desktop: '50px',
+};
+
+const marginHeights = {
+  mobile: '24px',
+  tablet: '24px',
+  desktop: '24px',
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -54,6 +72,26 @@ module.exports = {
           'linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.13) 100%)',
         'new-column-dark-hover':
           'linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.13) 100%)',
+      },
+
+      /**
+       * Screen width
+       * - mobile: 320px
+       * - tablet: 768px ~ 'md:'
+       * - desktop: 1280px ~ 'xl:'
+       */
+      width: {
+        'main-on-tablet': 'calc(100% - 260px)',
+        'main-on-desktop': 'calc(100% - 300px)',
+      },
+      height: {
+        'board-on-mobile': `calc(100vh - ${headerHeights.mobile} - ${marginHeights.mobile})`,
+        'board-on-tablet': `calc(100vh - ${headerHeights.tablet} - ${marginHeights.tablet})`,
+        'board-on-desktop': `calc(100vh - ${headerHeights.desktop} - ${marginHeights.desktop})`,
+
+        'new-column-mobile': `calc(100vh - ${headerHeights.mobile} - ${marginHeights.mobile} - ${footerHeights.mobile})`,
+        'new-column-tablet': `calc(100vh - ${headerHeights.tablet} - ${marginHeights.tablet} - ${footerHeights.tablet})`,
+        'new-column-desktop': `calc(100vh - ${headerHeights.desktop} - ${marginHeights.desktop} - ${footerHeights.desktop})`,
       },
     },
   },

@@ -1,21 +1,45 @@
 'use client';
 
 import cx from 'classix';
+import { useEffect } from 'react';
 
 import Header from '@/components/Header';
 import ModalController from '@/components/Modal';
+import { ShowSidebarButton } from '@/components/Sidebar';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import { useScreenWidth } from '@/hooks/screen';
 import useSidebarStore from '@/stores/sidebarStore';
 
 import Board from './Board';
 
 export default function Page() {
-  const { isSidebarShown } = useSidebarStore();
+  const { isSidebarShown, hideSidebar, showSidebar } = useSidebarStore();
+  const { screenType } = useScreenWidth();
+
+  useEffect(() => {
+    if (screenType === 'mobile') {
+      hideSidebar();
+    } else if (screenType === 'tablet') {
+      showSidebar();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenType]);
 
   return (
-    <div className="relative grid h-screen grid-cols-5 bg-light-grey dark:bg-very-dark-grey-black">
-      <Sidebar />
-      <div className={cx(isSidebarShown ? 'col-span-4' : 'col-span-5')}>
+    <div className="relative flex h-screen bg-light-grey dark:bg-very-dark-grey-black">
+      <Sidebar
+        className={cx(
+          'w-[260px] max-w=[260px] flex-auto flex-grow-0 xl:w-[300px] flex-shrink-0 transition-all',
+          isSidebarShown ? 'translate-x-0' : '-translate-x-full',
+        )}
+      />
+      <ShowSidebarButton />
+      <div
+        className={cx(
+          'flex-auto transition-all w-main-on-tablet lg:w-main-on-desktop',
+          isSidebarShown ? 'ml-0' : '',
+        )}
+      >
         <Header />
         <Board />
       </div>

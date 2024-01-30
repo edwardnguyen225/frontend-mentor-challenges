@@ -20,7 +20,7 @@ const Board: React.FC = () => {
   }
 
   return (
-    <div className="mx-6 mt-6 flex gap-6 overflow-x-auto">
+    <div className="mt-6 flex h-board-on-mobile gap-6 overflow-x-auto pl-6 md:h-board-on-tablet lg:h-board-on-desktop">
       {columns.map((col, index) => (
         <Column
           className={cx('grow-0 shrink-0 w-[280px]')}
@@ -34,7 +34,8 @@ const Board: React.FC = () => {
         type="button"
         className={cx(
           'group',
-          'mt-[38px] flex h-[80vh] w-[280px] shrink-0 items-center justify-center rounded-md ',
+          'h-new-column-mobile md:h-new-column-tablet xl:h-new-column-desktop w-[280px] ',
+          'mt-[38px] flex shrink-0 items-center justify-center rounded-md ',
           'bg-new-column hover:bg-new-column-hover',
           'dark:bg-new-column-dark dark:hover:bg-new-column-dark-hover',
         )}

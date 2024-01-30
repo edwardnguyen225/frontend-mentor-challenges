@@ -21,7 +21,8 @@ const BoardMenu: React.FC = () => {
         <Menu.Button
           type="button"
           className={cx(
-            'flex h-12 w-12 items-center justify-center rounded-full hover:bg-light-grey',
+            'h-8 w-6 md:h-12 md:w-8',
+            'flex items-center justify-center rounded-full hover:bg-light-grey',
             'dark:hover:bg-lines-dark',
           )}
           aria-label="Open Board Settings"

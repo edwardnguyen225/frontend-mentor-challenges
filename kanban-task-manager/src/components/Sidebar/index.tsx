@@ -1,6 +1,5 @@
 import Sidebar from './Sidebar';
-import { ShowSidebarButton } from './SidebarController';
 
 export default Sidebar;
 
-export { ShowSidebarButton };
+export { default as ShowSidebarButton } from './ShowSidebarButton';
