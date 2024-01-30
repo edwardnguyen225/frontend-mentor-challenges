@@ -8,41 +8,10 @@ import LogoDark from '@/public/assets/logo-light.svg';
 import { useKanbanStore } from '@/stores/newKanbanStore';
 import useSidebarStore from '@/stores/sidebarStore';
 
-import { IconHideSidebar } from '../Icons';
 import Typography from '../Typography';
 import BoardList from './BoardList';
+import HideSidebarButton from './HideSidebarButton';
 import ThemeController from './ThemeController';
-
-interface HideSidebarButtonProps {
-  className?: string;
-}
-
-const HideSidebarButton: React.FC<HideSidebarButtonProps> = ({ className }) => {
-  const { hideSidebar } = useSidebarStore();
-  const t = useTranslations('Board');
-
-  return (
-    <button
-      type="button"
-      aria-label="hide sidebar"
-      className={cx(
-        'pl-8 h-12 w-full rounded-r-full',
-        'group flex items-center justify-start gap-4',
-        'hover:bg-main-purple/10 dark:hover:bg-white',
-        className,
-      )}
-      onClick={hideSidebar}
-    >
-      <IconHideSidebar className="fill-medium-grey group-hover:fill-main-purple" />
-      <Typography
-        variant="heading-md"
-        className="text-medium-grey group-hover:text-main-purple"
-      >
-        {t('hide_sidebar')}
-      </Typography>
-    </button>
-  );
-};
 
 interface SidebarProps {
   className?: string;
