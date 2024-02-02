@@ -7,7 +7,6 @@ const meta: Meta<typeof Dropdown> = {
   args: {
     label: 'Dropdown',
     options: ['Todo', 'Doing', 'Done'],
-    defaultValue: 'Doing',
   },
 };
 

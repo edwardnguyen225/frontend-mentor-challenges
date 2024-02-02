@@ -6,7 +6,6 @@ const meta: Meta<typeof SubtaskCheckbox> = {
   component: SubtaskCheckbox,
   args: {
     id: '1',
-    subtask: 'This is a subtask',
     completed: false,
   },
 };
