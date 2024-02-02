@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-main-purple: #635fc7;
+    --color-main-purple-light: #a8a4ff;
+    --color-black: #000112;
+    --color-very-dark-grey-black: #20212c;
+    --color-dark-grey: #2b2c37;
+    --color-lines-dark: #3e3f4e;
+    --color-medium-grey: #828fa3;
+    --color-lines-light: #e4ebfa;
+    --color-light-grey: #f4f7fd;
+    --color-white: #ffffff;
+    --color-red: #ea5555;
+    --color-red-hover: #ff9898;
+  }
+}

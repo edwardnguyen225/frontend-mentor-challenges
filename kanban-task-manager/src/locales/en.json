@@ -1,0 +1,76 @@
+{
+  "Header": {
+    "new_board": "New Board",
+    "add_new_task": "+ Add New Task"
+  },
+  "Board": {
+    "all_boards": "All Boards ({count})",
+    "create_new_board": "+ Create New Board",
+    "edit_board": "Edit Board",
+    "delete_board": "Delete Board",
+    "empty_board_desc": "This board is empty. Create a new column to get started.",
+    "add_new_column": "+ Add New Column",
+    "new_column": "New Column",
+    "count_done_subtasks": "{count} of {total, plural, =1 {1 subtask} other {# subtasks}}",
+    "board_columns": "Board Columns",
+    "save_changes": "Save Changes",
+    "subtasks_and_count": "Subtasks ({count} of {total})",
+    "current_status": "Current Status",
+    "hide_sidebar": "Hide Sidebar",
+    "no_tasks": "No tasks yet",
+    "errors": {
+      "required_error": "Can't be empty",
+      "has_unnamed_column": "Has Unnamed Column",
+      "has_empty_subtask": "Has empty subtask"
+    },
+    "board_modal": {
+      "add_new_board": "Add New Board",
+      "name": "Name",
+      "name_placeholder": "e.g. Web Design",
+      "columns": "Columns",
+      "add_new_column": "+ Add New Column",
+      "new_column": "New Column",
+      "create_board": "Create New Board",
+      "todo": "To Do",
+      "doing": "Doing",
+      "done": "Done",
+      "edit_board": "Edit Board",
+      "board_name": "Board Name",
+      "board_columns": "Board Columns",
+      "save_changes": "Save Changes"
+    },
+    "delete_board_modal": {
+      "title": "Delete this board?",
+      "description": "Are you sure you want to delete the {name} board? This action will remove all columns and tasks and cannot be reversed.",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "add_task_modal": {
+      "modal_title": "Add New Task",
+      "title": "Title",
+      "title_placeholder": "e.g. Take coffee break",
+      "description": "Description",
+      "description_placeholder": "e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little.",
+      "subtasks": "Subtasks",
+      "subtask_placeholder": "e.g. Drink coffee",
+      "add_new_subtask": "+ Add New Subtask",
+      "status": "Status",
+      "submit": "Create Task",
+      "cancel": "Cancel"
+    },
+    "view_task_modal": {
+      "subtasks": "Subtasks ({count} of {total})",
+      "current_status": "Current Status",
+      "menu": {
+        "edit_task": "Edit Task",
+        "delete_task": "Delete Task"
+      }
+    },
+    "delete_task_modal": {
+      "title": "Delete this task?",
+      "description": "Are you sure you want to delete the ‘{title}’ task and its subtasks? This action cannot be reversed.",
+      "submit": "Delete",
+      "cancel": "Cancel"
+    }
+  }
+}
