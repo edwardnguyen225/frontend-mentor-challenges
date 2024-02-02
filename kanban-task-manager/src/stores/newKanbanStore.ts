@@ -26,6 +26,7 @@ export interface KanbanStore {
     [key: string]: Task;
   };
 
+  getCurrentColumns: () => Omit<Column, 'taskIds'>[];
   getCurrentBoard: () => Board | undefined;
   openBoard: (boardId: string) => void;
   addBoard: (
