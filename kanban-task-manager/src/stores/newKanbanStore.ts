@@ -79,7 +79,7 @@ const INIT_STATE: Pick<
   columns: DUMMY_COLUMNS,
   tasks: DUMMY_TASKS,
   isSidebarOpen: true,
-  theme: 'light',
+  theme: 'dark',
 
   modal: {
     isOpen: false,
