@@ -10,7 +10,9 @@ const breakpoints = {
 };
 
 export function useScreenWidth() {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0,
+  );
 
   useEffect(() => {
     const handleResize = () => {
