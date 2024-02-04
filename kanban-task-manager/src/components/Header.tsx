@@ -29,7 +29,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex h-16 w-full items-center border-b-2 border-lines-light bg-white md:h-20 dark:border-lines-dark dark:bg-dark-grey">
-      {isSidebarShown && screenType !== 'mobile' ? (
+      {!isSidebarShown && screenType !== 'mobile' ? (
         <Image
           src={LogoDark}
           alt="Logo"
