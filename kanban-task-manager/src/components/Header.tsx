@@ -9,6 +9,7 @@ import { useScreenWidth } from '@/hooks/screen';
 import LogoDark from '@/public/assets/logo-dark.svg';
 import LogoMobile from '@/public/assets/logo-mobile.svg';
 import { useKanbanStore, useModalStore } from '@/stores/newKanbanStore';
+import useSidebarStore from '@/stores/sidebarStore';
 
 import BoardMenu from './BoardMenu';
 import Button from './Button';
@@ -18,7 +19,8 @@ import Typography from './Typography';
 
 const Header: React.FC = () => {
   const { openAddTaskModal, openKanbanMenuModal } = useModalStore();
-  const { isSidebarOpen, getCurrentBoard } = useKanbanStore();
+  const { getCurrentBoard } = useKanbanStore();
+  const { isSidebarShown } = useSidebarStore();
   const { screenType } = useScreenWidth();
   const t = useTranslations('Header');
 
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex h-16 w-full items-center border-b-2 border-lines-light bg-white md:h-20 dark:border-lines-dark dark:bg-dark-grey">
-      {!isSidebarOpen && screenType !== 'mobile' ? (
+      {isSidebarShown && screenType !== 'mobile' ? (
         <Image
           src={LogoDark}
           alt="Logo"
@@ -39,7 +41,7 @@ const Header: React.FC = () => {
       <div
         className={cx(
           'flex h-full w-full grow items-center justify-between border-lines-light pl-4 md:pl-8 pr-2',
-          !isSidebarOpen && 'border-l-2',
+          !isSidebarShown && 'border-l-2',
         )}
       >
         {screenType !== 'mobile' && (

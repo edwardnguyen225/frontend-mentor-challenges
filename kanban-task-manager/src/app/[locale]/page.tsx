@@ -1,9 +1,9 @@
 'use client';
 
 import cx from 'classix';
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
-import Header from '@/components/Header';
 import ModalController from '@/components/Modal';
 import { ShowSidebarButton } from '@/components/Sidebar';
 import Sidebar from '@/components/Sidebar/Sidebar';
@@ -12,6 +12,8 @@ import { useModalStore } from '@/stores/newKanbanStore';
 import useSidebarStore from '@/stores/sidebarStore';
 
 import Board from './Board';
+
+const Header = dynamic(() => import('@/components/Header'), { ssr: false });
 
 export default function Page() {
   const { isSidebarShown, hideSidebar, showSidebar } = useSidebarStore();

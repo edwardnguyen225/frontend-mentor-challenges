@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         !isSidebarShown && 'hidden',
       )}
     >
-      <div className="flex h-24 items-center">
+      <div className="flex h-20 items-center">
         <Image
           src={theme === 'dark' ? LogoDark : LogoLight}
           alt="Logo"
