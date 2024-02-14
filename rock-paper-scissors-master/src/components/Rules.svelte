@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { isRulesOverlayOpen, closeRulesOverlay, gamePlayType } from '$lib/store';
+	import { rulesOverlay, gamePlayType } from '$lib/store';
 	import { onDestroy } from 'svelte';
 
 	let isNormalGame;
@@ -13,7 +13,7 @@
 	onDestroy(unsubscribe);
 </script>
 
-{#if $isRulesOverlayOpen}
+{#if $rulesOverlay}
 	<div
 		transition:fly={{ y: '-100vh', duration: 500 }}
 		class={'fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'}
@@ -25,7 +25,7 @@
 
 			<button
 				class="close-rules-btn w-12 h-12 flex justify-center items-center rounded-full"
-				on:click={closeRulesOverlay}
+				on:click={rulesOverlay.close}
 			>
 				<img src="images/icon-close.svg" alt="Close" />
 			</button>

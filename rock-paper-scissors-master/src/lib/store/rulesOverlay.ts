@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store';
 
-const isRulesOverlayOpen = writable(false);
+const createRulesOverlay = () => {
+	const { subscribe, set } = writable(false);
+	return {
+		subscribe,
+		open: () => set(true),
+		close: () => set(false)
+	};
+};
 
-function openRulesOverlay() {
-	isRulesOverlayOpen.set(true);
-}
-
-function closeRulesOverlay() {
-	isRulesOverlayOpen.set(false);
-}
-
-export { isRulesOverlayOpen, openRulesOverlay, closeRulesOverlay };
+const rulesOverlay = createRulesOverlay();
+export { rulesOverlay };
