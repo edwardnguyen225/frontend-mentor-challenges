@@ -42,11 +42,9 @@
 	}
 
 	.btn::before {
-		--btn-width: 142%; /* Just a magic number */
+		--btn-width: calc(100% + 2em); /* 100% + 2 * border-width */
 		content: '';
 		position: absolute;
-		top: -1em;
-		left: -1.1em;
 		width: var(--btn-width);
 		height: var(--btn-width);
 		border-radius: 50%;
