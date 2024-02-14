@@ -1,13 +1,19 @@
-<script>
-	import { getGameTitle, playerScore } from '$lib/store';
-	const gameTitle = getGameTitle().split(' ');
+<script lang="ts">
+	import { gamePlayType, playerScore } from '$lib/store';
+
+	let isNormalMode: boolean;
+	gamePlayType.subscribe((value) => {
+		isNormalMode = value === 'normal';
+	});
+
+	$: logoSrc = isNormalMode ? '/images/logo.svg' : '/images/logo-bonus.svg';
 </script>
 
 <div class="header-wrapper">
 	<div class="header-container">
-		<h1 class="header-container__title">
-			Rock<br />Paper<br />Scissors
-		</h1>
+		{#if logoSrc}
+			<img src={logoSrc} alt="Game" class="ml-3 max-h-12 md:max-h-24" />
+		{/if}
 		<div class="header-container__score">
 			<p class="header-container__score__title">Score</p>
 			<div class="header-container__score__value">{$playerScore}</div>
@@ -35,14 +41,6 @@
 
 		/* TODO: Fix radius to match design */
 		border-radius: 2px;
-	}
-
-	.header-container__title {
-		font-size: 21px;
-		text-transform: uppercase;
-		line-height: 16px;
-		font-weight: bold;
-		letter-spacing: 0;
 	}
 
 	.header-container__score {

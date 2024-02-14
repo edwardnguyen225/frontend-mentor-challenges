@@ -11,14 +11,6 @@ function setGamePlayType(type: GamePlayType) {
 	gamePlayType.set(type);
 }
 
-function getGameTitle() {
-	if (isNormalMode) {
-		return 'Rock Paper Scissors';
-	} else {
-		return 'Rock Paper Scissors Lizard Spock';
-	}
-}
-
 type ItemType = 'rock' | 'paper' | 'scissors' | 'lizard' | 'spock';
 const ROCK: ItemType = 'rock';
 const PAPER: ItemType = 'paper';
