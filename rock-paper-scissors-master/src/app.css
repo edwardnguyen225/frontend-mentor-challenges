@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
 	/* Primary */
 	--scissors-gradient: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
