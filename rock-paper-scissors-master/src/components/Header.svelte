@@ -10,7 +10,7 @@
 		</h1>
 		<div class="header-container__score">
 			<p class="header-container__score__title">Score</p>
-			<div class="header-container__score__value">{playerScore}</div>
+			<div class="header-container__score__value">{$playerScore}</div>
 		</div>
 	</div>
 </div>
