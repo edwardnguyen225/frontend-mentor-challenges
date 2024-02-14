@@ -1,14 +1,18 @@
 import { writable } from 'svelte/store';
 
 type GamePlayType = 'normal' | 'advanced';
-let gamePlayType: GamePlayType = 'normal';
+const gamePlayType = writable('normal');
+let isNormalMode: boolean;
+gamePlayType.subscribe((value) => {
+	isNormalMode = value === 'normal';
+});
 
 function setGamePlayType(type: GamePlayType) {
-	gamePlayType = type;
+	gamePlayType.set(type);
 }
 
 function getGameTitle() {
-	if (gamePlayType === 'normal') {
+	if (isNormalMode) {
 		return 'Rock Paper Scissors';
 	} else {
 		return 'Rock Paper Scissors Lizard Spock';
@@ -82,7 +86,7 @@ export const items: Record<ItemType, Item> = {
 
 const getItems = () => {
 	let gameItems: Item[] = [];
-	if (gamePlayType === 'normal') {
+	if (isNormalMode) {
 		gameItems = [items[ROCK], items[PAPER], items[SCISSORS]];
 	} else {
 		gameItems = [items[ROCK], items[PAPER], items[SCISSORS], items[LIZARD], items[SPOCK]];

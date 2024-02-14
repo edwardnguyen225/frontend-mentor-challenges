@@ -1,5 +1,5 @@
 <script>
-	import { getGameTitle, playerScore } from '$lib/index';
+	import { getGameTitle, playerScore } from '$lib/store';
 	const gameTitle = getGameTitle().split(' ');
 </script>
 

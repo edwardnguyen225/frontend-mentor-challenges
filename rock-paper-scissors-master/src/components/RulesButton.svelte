@@ -1,4 +1,6 @@
-<button
-	class="w-32 h-10 place-self-center border rounded-lg font-semibold tracking-[2.5px] uppercase hover:border-slate-400 hover:text-slate-400"
-	>Rules</button
->
+<script>
+	import { Button } from '$lib/ui';
+	import { openRulesOverlay } from '$lib/store';
+</script>
+
+<Button on:click={openRulesOverlay}>Rules</Button>

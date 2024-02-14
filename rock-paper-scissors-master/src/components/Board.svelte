@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getItems, handlePlayerInput } from '$lib';
+	import { getItems, handlePlayerInput } from '$lib/store';
 
 	const items = getItems();
 
