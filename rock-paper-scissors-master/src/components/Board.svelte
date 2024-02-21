@@ -1,54 +1,58 @@
 <script lang="ts">
 	import { getItems, handlePlayerInput } from '$lib/store';
+	import type { Item } from '$lib/store/type';
+	import { fade } from 'svelte/transition';
+	import ItemButton from './ItemButton.svelte';
 
 	const items = getItems();
+	let selectedItem: Item | null = items[0];
 
-	const translateTriangle = [
-		{ x: 0, y: '100%' },
-		{ x: '-100%', y: '-100%' },
-		{ x: '100%', y: '-100%' }
-	];
-	const calculateTrianglePosition = (index: number) => {
-		return translateTriangle[index];
+	const onPlayerInput = (item: Item) => {
+		if (selectedItem) {
+			selectedItem = null;
+			return;
+		}
+
+		selectedItem = item;
+		handlePlayerInput(item);
 	};
 </script>
 
 <div class="board-container relative flex justify-center items-center">
-	<img src="images/bg-triangle.svg" alt="" class="absolute w-3/4 z-[-1]" />
-	{#each items as item, index}
-		<button
-			class="btn w-[30%] h-[30%] bg-white flex justify-center items-center rounded-full border-[1em] absolute"
-			style="border-color: {item.colorLayer1}; transform: translate({calculateTrianglePosition(
-				index
-			).x}, {calculateTrianglePosition(index)
-				.y}); box-shadow: 0 0.5em {item.colorLayer0}, inset 0 0.5em var(--inset-shadow);"
-			on:click={() => handlePlayerInput(item)}
-		>
-			<img src={item.image} alt={item.name} class="w-1/2" />
-		</button>
+	{#if selectedItem === null}
+		<img
+			in:fade={{ duration: 200, delay: 300 }}
+			out:fade={{ duration: 200 }}
+			src="images/bg-triangle.svg"
+			alt=""
+			class="board-bg"
+		/>
+	{/if}
+	{#each items as item}
+		<ItemButton bind:item {selectedItem} {onPlayerInput} />
 	{/each}
 </div>
 
 <style>
 	.board-container {
 		margin: 0 auto;
-		--width-length: calc(100vw - 32px * 2);
-		--max-width: 500px;
-		width: var(--width-length);
-		height: var(--width-length);
+		width: 311px;
+		height: 281px;
 
-		max-width: var(--max-width);
-		max-height: var(--max-width);
+		@media screen and (min-width: 768px) {
+			width: 476px;
+			height: 430px;
+		}
 	}
 
-	.btn::before {
-		--btn-width: calc(100% + 2em); /* 100% + 2 * border-width */
-		content: '';
+	.board-bg {
 		position: absolute;
-		width: var(--btn-width);
-		height: var(--btn-width);
-		border-radius: 50%;
-		background: linear-gradient(rgba(255, 255, 255, 0.0966), rgba(255, 255, 255, 0.0001));
-		z-index: -1;
+		top: 27.5%;
+		scale: 1.2;
+		width: 70%;
+
+		@media screen and (min-width: 768px) {
+			top: 20%;
+		}
 	}
 </style>

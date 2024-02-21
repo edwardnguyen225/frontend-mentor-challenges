@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import type { ItemType, Item } from './type';
 
 type GamePlayType = 'normal' | 'advanced';
 const gamePlayType = writable('normal');
@@ -11,22 +12,11 @@ function setGamePlayType(type: GamePlayType) {
 	gamePlayType.set(type);
 }
 
-type ItemType = 'rock' | 'paper' | 'scissors' | 'lizard' | 'spock';
 const ROCK: ItemType = 'rock';
 const PAPER: ItemType = 'paper';
 const SCISSORS: ItemType = 'scissors';
 const LIZARD: ItemType = 'lizard';
 const SPOCK: ItemType = 'spock';
-
-type Item = {
-	name: ItemType;
-	image: string;
-	beats: string[];
-	color: string;
-	boxShadow: string;
-	colorLayer0?: string;
-	colorLayer1?: string;
-};
 
 export const items: Record<ItemType, Item> = {
 	[ROCK]: {
@@ -123,4 +113,4 @@ function handlePlayerInput(playerInput: Item) {
 	updateScore(result);
 }
 
-export { playerScore, gamePlayType, setGamePlayType, getGameTitle, handlePlayerInput, getItems };
+export { playerScore, gamePlayType, setGamePlayType, handlePlayerInput, getItems };
