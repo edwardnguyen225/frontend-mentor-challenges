@@ -106,11 +106,29 @@ function updateScore(result: 'win' | 'lose' | 'draw') {
 	}
 }
 
-function handlePlayerInput(playerInput: Item) {
-	const computerInput = generateComputerInput();
+/**
+ * Wait for the computer to generate its input and then determine the winner
+ * @param delay - The delay in milliseconds to wait for the computer to generate its input
+ * @returns {Promise<Item>} - The computer input and the result of the game
+ */
+async function waitAndGenerateComputerInput(delay: number) {
+	return new Promise<Item>((resolve) => {
+		setTimeout(() => {
+			const computerInput = generateComputerInput();
+			resolve(computerInput);
+		}, delay);
+	});
+}
+
+const MIN_DELAY = 1000;
+const MAX_DELAY = 2000;
+// Handle the player input and determine the winner
+async function handlePlayerInput(playerInput: Item) {
+	const randomDelay = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY;
+	const computerInput = await waitAndGenerateComputerInput(randomDelay);
 	const result = determineWinner(playerInput, computerInput);
-	console.table({ playerInput, computerInput, result });
 	updateScore(result);
+	return { computerInput, result };
 }
 
 export { playerScore, gamePlayType, setGamePlayType, handlePlayerInput, getItems };
