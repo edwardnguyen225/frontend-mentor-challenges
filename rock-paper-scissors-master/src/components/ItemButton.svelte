@@ -114,7 +114,7 @@
 		z-index: -1;
 	}
 
-	:not(.has-clicked) .btn:hover::after {
+	.btn:hover::after {
 		content: '';
 		position: absolute;
 		width: var(--item-hover-width);
@@ -123,6 +123,10 @@
 		background: white;
 		opacity: 0.1;
 		z-index: -100;
+	}
+
+	:global(.has-picked) .btn:hover::after {
+		opacity: 0;
 	}
 
 	.btn.is-computer {
