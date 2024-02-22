@@ -120,8 +120,8 @@ async function waitAndGenerateComputerInput(delay: number) {
 	});
 }
 
-const MIN_DELAY = 1000;
-const MAX_DELAY = 2000;
+const MIN_DELAY = 500;
+const MAX_DELAY = 1500;
 // Handle the player input and determine the winner
 async function handlePlayerInput(playerInput: Item) {
 	const randomDelay = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY;
