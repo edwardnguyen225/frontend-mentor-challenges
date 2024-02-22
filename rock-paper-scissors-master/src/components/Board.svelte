@@ -1,10 +1,21 @@
 <script lang="ts">
-	import { getItems, handlePlayerInput } from '$lib/store';
+	import { gamePlayType, getItems, handlePlayerInput } from '$lib/store';
 	import type { Item } from '$lib/store/type';
 	import { fade } from 'svelte/transition';
 	import ItemButton from './ItemButton.svelte';
+	import { onDestroy } from 'svelte';
 
-	const items = getItems();
+	let isNormalGame: boolean;
+	let items = getItems();
+
+	const unsubscribe = gamePlayType.subscribe((value) => {
+		isNormalGame = value === 'normal';
+		items = getItems();
+	});
+	onDestroy(unsubscribe);
+
+	$: imgSrc = isNormalGame ? 'images/bg-triangle.svg' : 'images/bg-pentagon.svg';
+
 	let selectedItem: Item | null = null;
 	let computerItem: Item | null = null;
 	let resultToShow = 'You lose';
@@ -39,12 +50,13 @@
 		class:has-picked={isPlaying}
 		class:user-win={shouldShowResult && doesUserWin}
 		class:computer-win={shouldShowResult && !doesUserWin}
+		class:is-advanced={!isNormalGame}
 	>
 		{#if selectedItem === null}
 			<img
 				in:fade={{ duration: 200, delay: 300 }}
 				out:fade={{ duration: 200 }}
-				src="images/bg-triangle.svg"
+				src={imgSrc}
 				alt=""
 				class="board-bg"
 			/>

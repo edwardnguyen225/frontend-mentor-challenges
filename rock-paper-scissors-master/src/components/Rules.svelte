@@ -5,12 +5,12 @@
 	import { rulesOverlay, gamePlayType } from '$lib/store';
 	import { onDestroy, onMount } from 'svelte';
 
+	let imageSrc: string;
 	let isNormalGame;
 	const unsubscribe = gamePlayType.subscribe((value) => {
 		isNormalGame = value === 'normal';
+		imageSrc = isNormalGame ? 'images/image-rules.svg' : 'images/image-rules-bonus.svg';
 	});
-
-	const imageSrc = isNormalGame ? 'images/image-rules.svg' : 'images/image-rules-bonus.svg';
 
 	onDestroy(unsubscribe);
 
@@ -29,8 +29,7 @@
 	}
 </script>
 
-{#if true}
-	<!-- {#if $rulesOverlay} -->
+{#if $rulesOverlay}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
