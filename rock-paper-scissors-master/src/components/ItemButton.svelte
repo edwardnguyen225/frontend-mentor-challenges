@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fade, fly, scale } from 'svelte/transition';
 	import type { Item } from '$lib/store/type';
 
 	export let item: Item | null;
@@ -12,12 +12,15 @@
 
 	$: isSelected = !!selectedItem && selectedItem.name === item?.name && !isComputer;
 	$: shouldShow = isSelected || !selectedItem || isComputer;
+
+	$: itemInTransition = isComputer ? scale : fade;
+	$: itemInDelay = isComputer ? 0 : 300;
 </script>
 
 {#if shouldShow && item}
 	<button
 		disabled={!!selectedItem}
-		in:fade={{ duration: 200, delay: 300 }}
+		in:itemInTransition={{ duration: 200, delay: itemInDelay }}
 		out:fade={{ duration: 200 }}
 		class="btn btn-{item.name} relative"
 		class:is-selected={isSelected}
@@ -32,6 +35,14 @@
 	<div class="btn-placeholder" class:is-computer={isComputer} />
 {/if}
 
+{#if isWinner}
+	<div class="winner-bg" in:scale>
+		<div class="winner-bg-layer winner-bg-layer-0" />
+		<div class="winner-bg-layer winner-bg-layer-1" />
+		<div class="winner-bg-layer winner-bg-layer-2" />
+	</div>
+{/if}
+
 {#if isSelected || isComputer}
 	<div
 		in:fly={{ y: '-2rem', duration: 500, delay: 300 }}
@@ -44,29 +55,40 @@
 {/if}
 
 <style>
+	:global(.board-container) {
+		--selected-item-scale: 1.1;
+
+		--item-width: 30%;
+		--item-min-width: 130px;
+		--item-max-width: 200px;
+		--item--border-width: 1em;
+
+		--item-hover-width: 160%;
+
+		--translate-top: -58%;
+		--translate-left: -70%;
+		--translate-bottom: 58%;
+	}
+
 	.btn {
 		position: absolute;
-		width: 30%;
-		height: 30%;
-		min-width: 130px;
-		min-height: 130px;
-		max-width: 200px;
-		max-height: 200px;
+		width: var(--item-width);
+		height: var(--item-width);
+		min-width: calc(var(--item-min-width));
+		min-height: calc(var(--item-min-width));
+		max-width: var(--item-max-width);
+		max-height: var(--item-max-width);
 
 		background-color: white;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border-radius: 100%;
-		border-width: 1em;
+		border-width: var(--item--border-width);
 
 		transition:
 			transform 0.5s ease-in-out,
 			scale 0.5s ease-in-out;
-
-		--translate-top: -58%;
-		--translate-left: -70%;
-		--translate-bottom: 58%;
 
 		&.btn-rock {
 			transform: translate(0, var(--translate-bottom));
@@ -82,7 +104,7 @@
 	}
 
 	.btn::before {
-		--btn-width: calc(100% + 2em); /* 100% + 2 * border-width */
+		--btn-width: calc(100% + 2 * var(--item--border-width));
 		content: '';
 		position: absolute;
 		width: var(--btn-width);
@@ -93,19 +115,14 @@
 	}
 
 	:not(.has-clicked) .btn:hover::after {
-		--btn-hover-width: 160%;
 		content: '';
 		position: absolute;
-		width: var(--btn-hover-width);
-		height: var(--btn-hover-width);
+		width: var(--item-hover-width);
+		height: var(--item-hover-width);
 		border-radius: 50%;
 		background: white;
 		opacity: 0.1;
 		z-index: -100;
-	}
-
-	:global(.board-container) {
-		--selected-item-scale: 1.1;
 	}
 
 	.btn.is-computer {
@@ -187,6 +204,64 @@
 		}
 	}
 
-	.btn.is-winner::after {
+	:global(.user-win) {
+		--winner-bg-translate-top: -30%;
+		--winner-bg-translate-left: -33%;
+	}
+
+	:global(.computer-win) {
+		--winner-bg-translate-top: -30%;
+		--winner-bg-translate-left: 33%;
+	}
+
+	.winner-bg {
+		width: calc(var(--item-width) * 3);
+		height: calc(var(--item-width) * 3.2);
+		min-width: calc(var(--item-min-width));
+		min-height: calc(var(--item-min-width));
+
+		position: absolute;
+		transform: translate(var(--winner-bg-translate-left), var(--winner-bg-translate-top));
+
+		z-index: -1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.winner-bg .winner-bg-layer {
+		--base-width: 75%;
+		--width-step: 30%;
+
+		--base-opacity: 0.01;
+		--opacity-step: 0.003;
+
+		--base-index: -1;
+		--index-step: -1;
+
+		position: absolute;
+		border-radius: 100%;
+		background-color: white;
+	}
+
+	.winner-bg .winner-bg-layer-0 {
+		width: var(--base-width);
+		height: var(--base-width);
+		opacity: var(--base-opacity);
+		z-index: var(--base-index);
+	}
+
+	.winner-bg .winner-bg-layer-1 {
+		width: calc(var(--base-width) + var(--width-step));
+		height: calc(var(--base-width) + var(--width-step));
+		opacity: calc(var(--base-opacity) - var(--opacity-step));
+		z-index: -2;
+	}
+
+	.winner-bg .winner-bg-layer-2 {
+		width: calc(var(--base-width) + 2 * var(--width-step));
+		height: calc(var(--base-width) + 2 * var(--width-step));
+		opacity: calc(var(--base-opacity) - 2 * var(--opacity-step));
+		z-index: -3;
 	}
 </style>

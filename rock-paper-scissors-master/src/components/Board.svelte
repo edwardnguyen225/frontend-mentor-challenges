@@ -5,9 +5,9 @@
 	import ItemButton from './ItemButton.svelte';
 
 	const items = getItems();
-	let selectedItem: Item | null = items[0];
-	let computerItem: Item | null = items[1];
-	let resultToShow = '';
+	let selectedItem: Item | null = null;
+	let computerItem: Item | null = null;
+	let resultToShow = 'You win';
 
 	$: isPlaying = selectedItem !== null;
 	$: shouldShowResult = false;
@@ -23,7 +23,7 @@
 
 		setTimeout(() => {
 			shouldShowResult = true;
-		}, 1000);
+		}, 300);
 	};
 
 	const onClickPlayAgain = () => {
@@ -35,8 +35,10 @@
 
 <div class="flex flex-col flex-1 w-full items-center">
 	<div
-		class="board-container relative flex justify-center items-center shrink-0"
+		class="board-container relative flex justify-center items-center shrink-0 overflow-visible"
 		class:has-picked={isPlaying}
+		class:user-win={shouldShowResult && doesUserWin}
+		class:computer-win={shouldShowResult && !doesUserWin}
 	>
 		{#if selectedItem === null}
 			<img
@@ -54,7 +56,7 @@
 				{onPlayerInput}
 				shouldShowPlaceholder={false}
 				isComputer={false}
-				isWinner={doesUserWin}
+				isWinner={shouldShowResult && doesUserWin}
 			/>
 		{/each}
 
@@ -65,14 +67,17 @@
 				{onPlayerInput}
 				shouldShowPlaceholder={true}
 				isComputer={true}
-				isWinner={!doesUserWin}
+				isWinner={shouldShowResult && !doesUserWin}
 			/>
 		{/if}
 	</div>
 </div>
 
 {#if shouldShowResult}
-	<div class="w-[220px] flex flex-col grow-0 items-center gap-4" transition:fade>
+	<div
+		class="w-[220px] flex flex-col grow-0 items-center gap-4"
+		transition:fade={{ duration: 200, delay: 0 }}
+	>
 		<p class="text-[56px] font-bold uppercase">{resultToShow}</p>
 		<button
 			class="w-full h-12 bg-white rounded-lg text-[#3B4262] uppercase font-semibold text-base tracking-[2.5px] hover:text-[#DB2E4D]"
