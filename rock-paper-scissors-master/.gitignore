@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Avoid accidental Sketch file upload 
+*.sketch
+
+# Avoid accidental XD or Figma upload if you convert the design file
+*.xd
+*.fig
