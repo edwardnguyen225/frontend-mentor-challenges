@@ -133,20 +133,8 @@
 		);
 	}
 
-	@media (min-width: 433px) {
-		.btn {
-			width: 198px;
-			height: 203px;
-			border-width: 1.5em;
-		}
-
-		.btn.is-computer {
-			--translate-left: -80%;
-		}
-	}
-
 	.btn.is-selected {
-		scale: 1.1;
+		scale: var(--selected-item-scale);
 		transform: translate(calc(var(--translate-left) + 0.5em), var(--translate-top));
 	}
 
@@ -233,7 +221,7 @@
 		--base-width: 75%;
 		--width-step: 30%;
 
-		--base-opacity: 0.01;
+		--base-opacity: 0.03;
 		--opacity-step: 0.003;
 
 		--base-index: -1;
@@ -263,5 +251,70 @@
 		height: calc(var(--base-width) + 2 * var(--width-step));
 		opacity: calc(var(--base-opacity) - 2 * var(--opacity-step));
 		z-index: -3;
+	}
+
+	@media (min-width: 1366px) {
+		:global(.board-container) {
+			--selected-item-scale: 1.5;
+		}
+
+		:global(.board-container.has-picked) {
+			--translate-top: 2rem;
+		}
+
+		:global(.board-container.computer-win),
+		:global(.board-container.user-win) {
+			--translate-left: -120%;
+		}
+
+		:global(.board-container.computer-win) .btn.is-computer,
+		:global(.board-container.user-win) .btn.is-computer {
+			--translate-left: -120%;
+		}
+
+		.selected-text {
+			font-size: 24px;
+			top: -15%;
+			left: -22.5%;
+			width: 293px;
+			transition: 0.5s ease-in-out;
+		}
+
+		:global(.board-container.user-win) .selected-text,
+		:global(.board-container.computer-win) .selected-text {
+			left: -52.5%;
+		}
+
+		.selected-text.is-computer {
+			left: unset;
+			width: 293px;
+			right: -27.5%;
+		}
+
+		:global(.board-container.computer-win) .selected-text.is-computer,
+		:global(.board-container.user-win) .selected-text.is-computer {
+			left: unset;
+			right: -52.5%;
+		}
+
+		.btn-placeholder.is-computer {
+			--translate-top: 3rem;
+			--translate-left: -106%;
+		}
+
+		:global(.user-win) {
+			--winner-bg-translate-top: 3.1rem;
+			--winner-bg-translate-left: -60%;
+		}
+
+		:global(.computer-win) {
+			--winner-bg-translate-top: 3.1rem;
+			--winner-bg-translate-left: 60%;
+		}
+
+		.winner-bg {
+			width: calc(var(--item-width) * 4);
+			height: calc(var(--item-width) * 4.3);
+		}
 	}
 </style>

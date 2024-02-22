@@ -9,7 +9,7 @@
 	$: logoSrc = isNormalMode ? '/images/logo.svg' : '/images/logo-bonus.svg';
 </script>
 
-<div class="header-wrapper">
+<header class="header-wrapper">
 	<div class="header-container">
 		{#if logoSrc}
 			<img src={logoSrc} alt="Game" class="ml-3 max-h-12 md:max-h-24" />
@@ -19,7 +19,7 @@
 			<div class="header-container__score__value">{$playerScore}</div>
 		</div>
 	</div>
-</div>
+</header>
 
 <style>
 	.header-wrapper {
@@ -41,6 +41,13 @@
 
 		/* TODO: Fix radius to match design */
 		border-radius: 2px;
+	}
+
+	@media (min-width: 1366px) {
+		.header-container {
+			margin: 0;
+			padding: 18px 24px;
+		}
 	}
 
 	.header-container__score {

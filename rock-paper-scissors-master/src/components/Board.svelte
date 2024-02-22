@@ -7,7 +7,7 @@
 	const items = getItems();
 	let selectedItem: Item | null = null;
 	let computerItem: Item | null = null;
-	let resultToShow = 'You win';
+	let resultToShow = 'You lose';
 
 	$: isPlaying = selectedItem !== null;
 	$: shouldShowResult = false;
@@ -75,7 +75,7 @@
 
 {#if shouldShowResult}
 	<div
-		class="w-[220px] flex flex-col grow-0 items-center gap-4"
+		class="w-[220px] flex flex-col grow-0 items-center gap-4 xl:absolute"
 		transition:fade={{ duration: 200, delay: 0 }}
 	>
 		<p class="text-[56px] font-bold uppercase">{resultToShow}</p>
