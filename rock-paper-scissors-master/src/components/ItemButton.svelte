@@ -89,18 +89,18 @@
 		transition:
 			transform 0.5s ease-in-out,
 			scale 0.5s ease-in-out;
+	}
 
-		&.btn-rock {
-			transform: translate(0, var(--translate-bottom));
-		}
+	.btn.btn-rock {
+		transform: translate(0, var(--translate-bottom));
+	}
 
-		&.btn-paper {
-			transform: translate(var(--translate-left), var(--translate-top));
-		}
+	.btn.btn-paper {
+		transform: translate(var(--translate-left), var(--translate-top));
+	}
 
-		&.btn-scissors {
-			transform: translate(calc(-1 * var(--translate-left)), var(--translate-top));
-		}
+	.btn.btn-scissors {
+		transform: translate(calc(-1 * var(--translate-left)), var(--translate-top));
 	}
 
 	:global(.board-container.is-advanced) {
@@ -114,27 +114,25 @@
 		--translate-third-row-y: 125%;
 	}
 
-	:global(.board-container.is-advanced) .btn {
-		/* First row */
-		&.btn-scissors {
-			transform: translate(var(--translate-first-row-x), var(--translate-first-row-y));
-		}
+	/* First row */
+	:global(.board-container.is-advanced) .btn.btn-scissors {
+		transform: translate(var(--translate-first-row-x), var(--translate-first-row-y));
+	}
 
-		/* Second row */
-		&.btn-spock {
-			transform: translate(var(--translate-second-row-x), var(--translate-second-row-y));
-		}
-		&.btn-paper {
-			transform: translate(calc(-1 * var(--translate-second-row-x)), var(--translate-second-row-y));
-		}
+	/* Second row */
+	:global(.board-container.is-advanced) .btn.btn-spock {
+		transform: translate(var(--translate-second-row-x), var(--translate-second-row-y));
+	}
+	:global(.board-container.is-advanced) .btn.btn-paper {
+		transform: translate(calc(-1 * var(--translate-second-row-x)), var(--translate-second-row-y));
+	}
 
-		/* Third row */
-		&.btn-lizard {
-			transform: translate(var(--translate-third-row-x), var(--translate-third-row-y));
-		}
-		&.btn-rock {
-			transform: translate(calc(-1 * var(--translate-third-row-x)), var(--translate-third-row-y));
-		}
+	/* Third row */
+	:global(.board-container.is-advanced) .btn.btn-lizard {
+		transform: translate(var(--translate-third-row-x), var(--translate-third-row-y));
+	}
+	:global(.board-container.is-advanced) .btn.btn-rock {
+		transform: translate(calc(-1 * var(--translate-third-row-x)), var(--translate-third-row-y));
 	}
 
 	.btn::before {
@@ -190,13 +188,13 @@
 		line-height: 32px;
 		letter-spacing: 1.88px;
 		text-transform: uppercase;
+	}
 
-		&.is-computer {
-			width: fit-content;
-			position: absolute;
-			right: -10px;
-			left: auto;
-		}
+	.selected-text.is-computer {
+		width: fit-content;
+		position: absolute;
+		right: -10px;
+		left: auto;
 	}
 
 	.btn-placeholder {

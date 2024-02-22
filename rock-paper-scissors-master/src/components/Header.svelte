@@ -86,11 +86,6 @@
 			padding: 18px 24px;
 		}
 
-		.header-container__title {
-			font-size: 40px;
-			line-height: 32px;
-		}
-
 		.header-container__score {
 			min-width: 150px;
 			height: 114px;
