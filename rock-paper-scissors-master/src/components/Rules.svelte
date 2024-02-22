@@ -29,7 +29,8 @@
 	}
 </script>
 
-{#if $rulesOverlay}
+{#if true}
+	<!-- {#if $rulesOverlay} -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
@@ -38,9 +39,9 @@
 	>
 		<div
 			in:fly={{ y: '-100vh', duration: 500 }}
-			class="bg-white p-8 pt-24 rounded-lg w-screen h-screen flex flex-col items-center gap-28 xl:w-[400px] xl:h-[unset] xl:pt-8 xl:gap-12"
+			class="bg-white p-8 pt-24 rounded-lg w-screen h-screen flex flex-col items-center justify-between xl:w-[400px] xl:h-[unset] xl:pt-8"
 		>
-			<div class="flex w-full flex-1 justify-center items-center xl:justify-between">
+			<div class="flex w-full justify-center items-center xl:justify-between">
 				<h2 class="text-[32px] leading-8 font-semibold text-[var(--dark-text)] uppercase">Rules</h2>
 
 				<button
