@@ -6,6 +6,7 @@
 	export let selectedItem: Item | null;
 	export let shouldShowPlaceholder: boolean;
 	export let isComputer: boolean;
+	export let isWinner: boolean;
 
 	export let onPlayerInput: (item: Item) => void;
 
@@ -18,7 +19,7 @@
 		disabled={!!selectedItem}
 		in:fade={{ duration: 200, delay: 300 }}
 		out:fade={{ duration: 200 }}
-		class="btn btn-{item.name}"
+		class="btn btn-{item.name} relative"
 		class:is-selected={isSelected}
 		class:is-computer={isComputer}
 		style="border-color: {item.colorLayer1};  box-shadow: 0 0.5em {item.colorLayer0}, inset 0 0.5em var(--inset-shadow);"
@@ -103,8 +104,16 @@
 		z-index: -100;
 	}
 
+	:global(.board-container) {
+		--selected-item-scale: 1.1;
+	}
+
 	.btn.is-computer {
-		transform: translate(calc(-1 * var(--translate-left)), var(--translate-top));
+		scale: var(--selected-item-scale);
+		transform: translate(
+			calc(-1 * var(--translate-left) - 0.5em),
+			/* Minus 0.5em as it is scaled up */ var(--translate-top)
+		);
 	}
 
 	@media (min-width: 433px) {
@@ -115,7 +124,6 @@
 		}
 
 		.btn.is-computer {
-			scale: 1.1;
 			--translate-left: -80%;
 		}
 	}
@@ -169,13 +177,16 @@
 
 	.btn-placeholder.is-computer {
 		--translate-top: -58%;
-		--translate-left: -70%;
-		transform: translate(calc(-1 * var(--translate-left)), var(--translate-top));
+		--translate-left: -60%;
+		transform: translate(calc((-1 * var(--translate-left)) + 0.75em), var(--translate-top));
 
 		@media (min-width: 433px) {
 			--translate-left: -87.5%;
 			width: 198px;
 			height: 203px;
 		}
+	}
+
+	.btn.is-winner::after {
 	}
 </style>
