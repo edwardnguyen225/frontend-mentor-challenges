@@ -91,11 +91,6 @@
 		margin: 0 auto;
 		width: 311px;
 		height: 281px;
-
-		@media screen and (min-width: 768px) {
-			width: 476px;
-			height: 430px;
-		}
 	}
 
 	.board-bg {
@@ -103,8 +98,15 @@
 		top: 27.5%;
 		scale: 1.2;
 		width: 70%;
+	}
 
-		@media screen and (min-width: 768px) {
+	@media screen and (min-width: 1366px) {
+		.board-container {
+			width: 476px;
+			height: 430px;
+		}
+
+		.board-bg {
 			top: 20%;
 		}
 	}

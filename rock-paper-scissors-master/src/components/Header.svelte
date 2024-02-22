@@ -43,13 +43,6 @@
 		border-radius: 2px;
 	}
 
-	@media (min-width: 1366px) {
-		.header-container {
-			margin: 0;
-			padding: 18px 24px;
-		}
-	}
-
 	.header-container__score {
 		min-width: 80px;
 		height: 72px;
@@ -86,8 +79,9 @@
 		color: #565468;
 	}
 
-	@media (min-width: 768px) {
+	@media (min-width: 1366px) {
 		.header-container {
+			margin: 0;
 			margin-top: 48px;
 			padding: 18px 24px;
 		}

@@ -144,7 +144,7 @@
 
 		position: absolute;
 
-		left: 0;
+		left: -0.2rem;
 		margin-top: 5rem;
 
 		font-size: 15px;
@@ -152,10 +152,6 @@
 		line-height: 32px;
 		letter-spacing: 1.88px;
 		text-transform: uppercase;
-
-		@media (min-width: 433px) {
-			width: 198px;
-		}
 
 		&.is-computer {
 			width: fit-content;
@@ -167,12 +163,12 @@
 
 	.btn-placeholder {
 		position: absolute;
-		width: 30%;
-		height: 30%;
-		min-width: 130px;
-		min-height: 130px;
-		max-width: 200px;
-		max-height: 200px;
+		width: var(--item-width);
+		height: var(--item-width);
+		min-width: calc(var(--item-min-width));
+		min-height: calc(var(--item-min-width));
+		max-width: var(--item-max-width);
+		max-height: var(--item-max-width);
 
 		border-radius: 100%;
 
@@ -184,12 +180,6 @@
 		--translate-top: -58%;
 		--translate-left: -60%;
 		transform: translate(calc((-1 * var(--translate-left)) + 0.75em), var(--translate-top));
-
-		@media (min-width: 433px) {
-			--translate-left: -87.5%;
-			width: 198px;
-			height: 203px;
-		}
 	}
 
 	:global(.user-win) {
@@ -272,6 +262,12 @@
 			--translate-left: -120%;
 		}
 
+		.btn {
+			width: 198px;
+			height: 203px;
+			border-width: 1.5em;
+		}
+
 		.selected-text {
 			font-size: 24px;
 			top: -15%;
@@ -297,9 +293,16 @@
 			right: -52.5%;
 		}
 
+		.btn-placeholder {
+			width: 300px;
+			height: 300px;
+			max-width: unset;
+			max-height: unset;
+		}
+
 		.btn-placeholder.is-computer {
 			--translate-top: 3rem;
-			--translate-left: -106%;
+			--translate-left: -75%;
 		}
 
 		:global(.user-win) {
